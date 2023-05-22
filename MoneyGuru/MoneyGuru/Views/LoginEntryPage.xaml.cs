@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace MoneyGuru.ViewModel
+namespace MoneyGuru.Views
 {
     public partial class LoginEntryPage : ContentPage
     {
         public LoginEntryPage()
         {
-            //InitializeComponent();
-            //this.BindingContext = new LoginEntryViewModel();
+            InitializeComponent();
+            this.BindingContext = new LoginEntryViewModel();
 
         }
     }
