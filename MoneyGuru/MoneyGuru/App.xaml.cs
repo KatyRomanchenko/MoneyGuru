@@ -12,13 +12,12 @@ namespace MoneyGuru
         public App()
         {
             InitializeComponent();
-
-            DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }
 
         protected override void OnStart()
         {
+            //подключиться к БД
         }
 
         protected override void OnSleep()

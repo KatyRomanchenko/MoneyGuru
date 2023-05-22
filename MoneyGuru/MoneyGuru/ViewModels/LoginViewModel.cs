@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace MoneyGuru.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class LoginViewModel : ContentPage
     {
         public Command LoginCommand { get; }
 
@@ -17,7 +17,6 @@ namespace MoneyGuru.ViewModels
 
         private async void OnLoginClicked(object obj)
         {
-            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
             await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
         }
     }
