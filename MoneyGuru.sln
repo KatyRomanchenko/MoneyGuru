@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyGuru.Android", "MoneyGuru\MoneyGuru.Android\MoneyGuru.Android.csproj", "{7BF05746-A66B-4999-B2FD-05D495941917}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyGuru", "MoneyGuru\MoneyGuru\MoneyGuru.csproj", "{53A8E16C-AC42-459A-964D-48FC69E809AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoneyGuru", "MoneyGuru\MoneyGuru\MoneyGuru.csproj", "{53A8E16C-AC42-459A-964D-48FC69E809AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

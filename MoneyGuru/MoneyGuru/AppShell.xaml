@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MoneyGuru.AppShell">
-    <StackLayout>
-        <Button BackgroundColor="Aquamarine" Text="Log in" FontSize="30" TextTransform="Uppercase" TextColor="White" Clicked="OnLoginClicked"/>
-        <Button BackgroundColor="Aquamarine" Text="Sign in" FontSize="30" TextTransform="Uppercase" TextColor="White" Clicked="OnLoginClicked"/>
+             x:Class="MoneyGuru.AppShell"
+             BackgroundColor="#F3ECF3">
+    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+        <Button BackgroundColor="#D8BFD8" Padding="70,5,70,5" CornerRadius="10" Text="Log in" FontSize="20"  TextTransform="Uppercase" TextColor="White" Clicked="OnLoginClicked"/>
+        <Button BackgroundColor="#D8BFD8" Padding="70,5,70,5" CornerRadius="10" Text="Sign in" FontSize="20" TextTransform="Uppercase" TextColor="White" Clicked="OnLoginClicked"/>
     </StackLayout>
-    
 </ContentPage>

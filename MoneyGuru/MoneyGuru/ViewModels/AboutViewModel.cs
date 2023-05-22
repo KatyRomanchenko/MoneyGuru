@@ -9,8 +9,7 @@ namespace MoneyGuru.ViewModels
     {
         public AboutViewModel()
         {
-            Title = "About";
-            OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://aka.ms/xamarin-quickstart"));
+//            InitializeComponent();
         }
 
         public ICommand OpenWebCommand { get; }
