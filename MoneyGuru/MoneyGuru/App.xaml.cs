@@ -1,18 +1,17 @@
-﻿using MoneyGuru.Services;
-using MoneyGuru.Views;
-using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
 
 namespace MoneyGuru
 {
     public partial class App : Application
     {
+        //private static DataService _dataService;
 
+        //public static DataService DataService => _dataService ?? (_dataService = new DataService());
         public App()
         {
-            InitializeComponent();
-            MainPage = new NavigationPage(new AppShell());
+            //InitializeComponent();
+            //MainPage.Navigation.PopToRootAsync(MainPage());
+            MainPage = new PrestartPage();
         }
 
         protected override void OnStart()

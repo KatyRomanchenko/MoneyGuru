@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoneyGuru.Views.CreateWalletPage"
+             Title="Create Wallet">
+    <ContentPage.Content>
+        <StackLayout Spacing="20">
+            <Entry Placeholder="Wallet Name" Text="{Binding WalletName}" />
+            <Picker Title="Select Icon" SelectedItem="{Binding SelectedIcon}" ItemsSource="{Binding IconList}" />
+            <Entry Placeholder="Amount of Money" Keyboard="Numeric" Text="{Binding WalletAmount}" />
+            <Button Text="Create" Command="{Binding CreateWalletCommand}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

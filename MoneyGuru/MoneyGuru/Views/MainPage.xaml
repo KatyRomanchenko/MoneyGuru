@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            BarBackgroundColor="#4F3D6B"
+            BarTextColor="White"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            x:Class="MoneyGuru.MainPage">
+
+    <!-- Home Button -->
+    <ContentPage IconImageSource="https://cdn-icons-png.flaticon.com/512/3916/3916996.png">
+        <StackLayout Margin="20">
+            <!-- Total amount of all wallets -->
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding TotalWalletAmount}" HorizontalOptions="StartAndExpand"/>
+                <Button Text="Create Wallet" Command="{Binding CreateWalletCommand}" HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+
+            <!-- Savings for the month -->
+            <Frame CornerRadius="10" Padding="10" Margin="0,10,0,0">
+                <StackLayout Orientation="Horizontal">
+                    <!-- Analytical ring placeholder -->
+                    <BoxView Color="Transparent" WidthRequest="100" HeightRequest="100" HorizontalOptions="StartAndExpand"/>
+                    <StackLayout HorizontalOptions="EndAndExpand">
+                        <Label Text="{Binding MonthlySavingsAmount}"/>
+                        <Label Text="Saved for the month"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage>
+
+    <!-- Info Button -->
+    <ContentPage IconImageSource="https://cdn-icons-png.flaticon.com/512/3914/3914156.png">
+        <StackLayout Margin="20">
+            <!-- Your page contents -->
+        </StackLayout>
+    </ContentPage>
+
+    <!-- Add Button -->
+    <ContentPage IconImageSource="https://cdn-icons-png.flaticon.com/512/3914/3914337.png">
+        <StackLayout Margin="20">
+            <!-- Your page contents -->
+        </StackLayout>
+    </ContentPage>
+
+    <!-- Analysis Button -->
+    <ContentPage IconImageSource="https://cdn-icons-png.flaticon.com/512/3916/3916763.png">
+        <StackLayout Margin="20">
+        </StackLayout>
+    </ContentPage>
+
+    <!-- Account Button -->
+    <ContentPage IconImageSource="https://cdn-icons-png.flaticon.com/128/3917/3917705.png">
+        <StackLayout Margin="20">
+        </StackLayout>
+    </ContentPage>
+
+</TabbedPage>
