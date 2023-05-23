@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MoneyGuru.Views.LoginEntryPage"
+             x:Class="MoneyGuru.LoginEntryPage"
              BackgroundColor="#F3ECF3">
     <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
 
@@ -14,14 +14,17 @@
         </Frame>
         <Button 
             Text="Login"
+            TextColor="White"
             FontSize="15"
+            Clicked="OnLoginClicked"
             BackgroundColor="#4F3D6B"
-            Command="{Binding LoginCommand}" 
             VerticalOptions="EndAndExpand" 
             HorizontalOptions="CenterAndExpand" 
-            IsEnabled="{Binding IsLoginEnabled}" 
             Margin="0,15,0,0"
             Padding="50,5,50,5">
         </Button>
     </StackLayout>
 </ContentPage>
+<!--Command="{Binding LoginCommand}"
+IsEnabled="{Binding IsLoginEnabled}"--> 
+
