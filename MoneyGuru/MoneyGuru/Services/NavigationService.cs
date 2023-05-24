@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace MoneyGuru 
 {
-    public class NavigationService : INavigationService
+    public class NavigationService  //INavigationService
     {
         //protected Page CurrentDetail
         //{

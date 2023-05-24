@@ -6,7 +6,7 @@ namespace MoneyGuru
 {
     public interface INavigationService
     {
-        void NavigateToPage(MainPageItem item);
+        void NavigateToPage(MainPage item);
 
         void NavigateToPage(Type item, object parameter);
 

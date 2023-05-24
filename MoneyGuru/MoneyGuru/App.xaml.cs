@@ -1,30 +1,36 @@
-﻿using Xamarin.Forms;
+﻿using SQLite;
+using System;
+using System.IO;
+using Xamarin.Forms;
 
 namespace MoneyGuru
 {
     public partial class App : Application
     {
-        //private static DataService _dataService;
+        static SQLiteConnection db;
 
-        //public static DataService DataService => _dataService ?? (_dataService = new DataService());
         public App()
         {
-            //InitializeComponent();
-            //MainPage.Navigation.PopToRootAsync(MainPage());
             MainPage = new PrestartPage();
         }
 
-        protected override void OnStart()
+        public static SQLiteConnection Database
         {
-            //подключиться к БД
+            get
+            {
+                if (db == null)
+                {
+                    var sqliteFilename = "UserSQLite.db3";
+                    string folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                    var path = Path.Combine(folder, sqliteFilename);
+                    db = new SQLiteConnection(path);
+                    db.CreateTable<User>();
+                }
+                return db;
+            }
         }
-
-        protected override void OnSleep()
-        {
-        }
-
-        protected override void OnResume()
-        {
-        }
+        protected override void OnStart() { }
+        protected override void OnSleep() { }
+        protected override void OnResume() { }
     }
 }
