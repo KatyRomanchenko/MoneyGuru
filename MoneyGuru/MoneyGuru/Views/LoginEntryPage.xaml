@@ -2,10 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MoneyGuru.LoginEntryPage"
-             BackgroundColor="#F3ECF3">
+             BackgroundColor="White">
     <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-
-        <Frame BackgroundColor="#D8BFD8" Padding="50,5,50,5" CornerRadius="10">
+        <Image Source="https://img.freepik.com/free-vector/my-password-concept-illustration_114360-4294.jpg" WidthRequest="300" HeightRequest="300"/>
+        <Frame BackgroundColor="#D8BFD8" Padding="50,5,50,5" Margin="0,30,0,0" CornerRadius="10">
             <Entry x:Name="EmailEntry" Placeholder="text@example.com" PlaceholderColor="#FAFAFA" Text="{Binding Email}" Keyboard="Email" FontSize="20" TextColor="White"/>
         </Frame>
 
