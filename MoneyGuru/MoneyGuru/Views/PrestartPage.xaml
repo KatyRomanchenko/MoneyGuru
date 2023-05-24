@@ -2,13 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MoneyGuru.PrestartPage"
-			 BackgroundColor="#F3ECF3">
+			 BackgroundColor="White">
     <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
         <Frame
             WidthRequest="200"
             HeightRequest="200"
             CornerRadius="200"
-            BackgroundColor="White"
+            BackgroundColor="#E6B5D4"
             Padding="30,30,30,30"
             HorizontalOptions="Center"
             VerticalOptions="Center">
@@ -20,7 +20,7 @@
 			TextColor="White"
 			Clicked="OnLogInClicked"
 			FontSize="15"
-			BackgroundColor="#D8BFD8"
+			BackgroundColor="#A7519F"
 			Padding="50,5,50,5"
 			Margin="0,10,0,0"
 			CornerRadius="10">
@@ -30,7 +30,7 @@
 			TextColor="White"
 			Clicked="OnSignUpClicked"
 			FontSize="15"
-			BackgroundColor="#D8BFD8"
+			BackgroundColor="#A7519F"
 			Padding="50,5,50,5"
 			Margin="0,10,0,0"
 			CornerRadius="10">

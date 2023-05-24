@@ -3,13 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-public class User
+public class Goal
 {
-   // [PrimaryKey, AutoIncrement]
+    [PrimaryKey, AutoIncrement]
+    public int GoalID { get; set; }
     public int UserID { get; set; }
 
-    //[Unique]
+    [Unique]
     public string Email { get; set; }
     public string Password { get; set; }  //Зробити хешування
-    //public string Token { get; set; }
+    public string Token { get; set; }
+    public decimal CurrentBalance { get; set; } 
 }

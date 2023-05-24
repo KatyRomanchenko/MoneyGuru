@@ -22,7 +22,7 @@ namespace MoneyGuru
                 if (user.Password == PasswordEntry.Text)  // Use hash comparison here
                 {
                     // Log in user
-                    await SecureStorage.SetAsync("userToken", user.Token); //var userToken = await SecureStorage.GetAsync("userToken"); to get it later
+                    //await SecureStorage.SetAsync("userToken", user.Token); //var userToken = await SecureStorage.GetAsync("userToken"); to get it later
                     Application.Current.MainPage = new MainPage();
                 }
                 else

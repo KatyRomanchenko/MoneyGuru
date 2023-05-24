@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System;
 using System.Linq;
+using MoneyGuru.ViewModels;
 
 namespace MoneyGuru
 {
@@ -24,12 +25,13 @@ namespace MoneyGuru
                 {
                     Email = EmailEntry.Text,
                     Password = PasswordEntry.Text,
-                    Token = Guid.NewGuid().ToString(), //Generating a new GUID as a token
+                    //Token = Guid.NewGuid().ToString(), //Generating a new GUID as a token
 
                 };
                 App.Database.Insert(newUser);
                 await DisplayAlert("Success", "User created successfully", "OK");
-                await Navigation.PopAsync(); //go back to the login page
+                Application.Current.MainPage = new LoginEntryViewModel();
+                //await Navigation.PopAsync(); //go back to the login page
             }
             else
             {

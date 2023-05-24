@@ -4,8 +4,8 @@ namespace MoneyGuru
 {
     public class TransactionDetail
     {
-        //[PrimaryKey, AutoIncrement]
-        //[Display(AutoGenerateField = false)]
+       // [PrimaryKey, AutoIncrement]
+       // [Display(AutoGenerateField = false)]
         public int ID { get; set; }
 
         public string Name { get; set; }
