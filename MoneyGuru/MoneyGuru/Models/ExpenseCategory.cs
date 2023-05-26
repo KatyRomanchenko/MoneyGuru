@@ -19,6 +19,6 @@ namespace MoneyGuru
         public double Percentage { get; set; }
 
         //[Ignore]
-        public List<TransactionDetail> Transactions { get; set; }
+        public List<Transaction> Transactions { get; set; }
     }
 }
