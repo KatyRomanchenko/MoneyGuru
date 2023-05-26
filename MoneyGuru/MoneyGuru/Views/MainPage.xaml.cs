@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
-using static Transaction;
 
 namespace MoneyGuru
 {
@@ -30,7 +29,7 @@ namespace MoneyGuru
                 Category = CategoryPicker.SelectedItem.ToString()
             };
 
-            App.Database.Insert(newTransaction);
+            Database.db.Insert(newTransaction);
 
             await DisplayAlert("Success", "Transaction added successfully", "OK");
         }
