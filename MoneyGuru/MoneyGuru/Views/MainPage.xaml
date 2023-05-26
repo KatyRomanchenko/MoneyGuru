@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            BarBackgroundColor="#E6B5D4"
+            BarBackgroundColor="#E9C31E"
             BarTextColor="White"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
@@ -13,7 +13,7 @@
             <!-- First part -->
             <Grid VerticalOptions="CenterAndExpand" BackgroundColor="Transparent">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="160"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0" Margin="0">
@@ -22,70 +22,73 @@
                         <ColumnDefinition Width="10"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    
-                    <Frame Grid.Column="0" Padding="10" CornerRadius="15" BackgroundColor="#E6B5D4">
+
+                    <Frame Grid.Column="0" Padding="10" CornerRadius="15" BackgroundColor="#E9C31E">
                     </Frame>
-                    <Frame Grid.Column="2" Padding="10" CornerRadius="15" BackgroundColor="#BE6DAC">
-                    </Frame>
+                    <Frame Grid.Column="2" Padding="10" CornerRadius="15" BackgroundColor="#7853FA">
+                    <StackLayout>
+                        <Label Text="Wallet" FontSize="25" HorizontalOptions="CenterAndExpand" VerticalOptions="Start"/>
+                        <Grid Margin="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="45"/>
+                                <RowDefinition Height="45"/>
+                                <RowDefinition Height="45"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Text="Wallet1" FontSize="10" Grid.Column="0" Grid.Row="0"/>
+                            <Button Text="Wallet2" FontSize="10" Grid.Column="2" Grid.Row="0"/>
+                            <Button Text="Wallet3" FontSize="10" Grid.Column="0" Grid.Row="1"/>
+                            <Button Text="Wallet4" FontSize="10" Grid.Column="2" Grid.Row="1"/>
+                            <Button Text="Wallet5" FontSize="10" Grid.Column="0" Grid.Row="2"/>
+                            <Button Text="Wallet6" FontSize="10" Grid.Column="2" Grid.Row="2"/>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
                 </Grid>
             </Grid>
 
             <!-- Second part -->
-            <Grid VerticalOptions="CenterAndExpand" BackgroundColor="#BE6DAC" Margin="0">
+            <Grid VerticalOptions="CenterAndExpand" BackgroundColor="#7853FA" Margin="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-                <Grid Grid.Row="0" Margin="10">
+                <Label Grid.Column="0" Text="1345$" FontSize="60" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="70"/>
-                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-
-                    <StackLayout Grid.Column="0" Orientation="Horizontal">
-                        <BoxView Color="#E6B5D4" WidthRequest="185" HeightRequest="50"/>
-                    </StackLayout>
-
-                    <StackLayout Grid.Column="1" Orientation="Horizontal" Margin="0">
-                        <Grid BackgroundColor="#000000" >
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-
-                            <Grid Grid.Row="0" Margin="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="70"/>
-                                </Grid.ColumnDefinitions>
-                            </Grid>
-                            <Grid Grid.Row="1" Margin="0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="70"/>
-                                </Grid.ColumnDefinitions>
-                            </Grid>
-                        </Grid>
-                    </StackLayout>
-
-                    <StackLayout Grid.Column="2" Orientation="Horizontal">
-                        <Grid BackgroundColor="#000000">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-
-                            <Grid Grid.Row="0" Margin="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50"/>
-                                </Grid.ColumnDefinitions>
-                            </Grid>
-                        </Grid>
-                    </StackLayout>
+                    <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="#E9C31E">
+                        <Label Text="Text 1" FontSize="15" HorizontalOptions="CenterAndExpand" VerticalOptions="End" />
+                    </Frame>
+                    <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="#E9C31E">
+                        <Label Text="Text 2" FontSize="15" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" />
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="0" BackgroundColor="#E9C31E">
+                        <Label Text="Text 3" FontSize="15" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" />
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="#E9C31E">
+                        <Label Text="Text 4" FontSize="15" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" />
+                    </Frame>
                 </Grid>
             </Grid>
             
             <!-- Third part -->
-            <Grid VerticalOptions="CenterAndExpand" BackgroundColor="#BE6DAC">
+            <Grid VerticalOptions="CenterAndExpand" BackgroundColor="#7853FA">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70"/>
                     <RowDefinition Height="70"/>
@@ -116,9 +119,9 @@
                         <ColumnDefinition Width="10"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Padding="10" CornerRadius="5" BackgroundColor="#eeeeee"/>
-                    <Button Grid.Column="2" Padding="10" CornerRadius="5" BackgroundColor="#eeeeee"/>
-                    <Button Grid.Column="4" Padding="10" CornerRadius="5" BackgroundColor="#eeeeee"/>
+                    <Button Grid.Column="0" Clicked="OnCurrencyCalculationClicked" Padding="10" CornerRadius="5" BackgroundColor="#eeeeee" ImageSource="https://cdn-icons-png.flaticon.com/128/2374/2374409.png"/>
+                    <Button Grid.Column="2" Clicked="OnCalculationClicked" Padding="10" CornerRadius="5" BackgroundColor="#eeeeee" ImageSource="https://cdn-icons-png.flaticon.com/128/2374/2374367.png"/>
+                    <Button Grid.Column="4" Clicked="OnCreateGoalClicked" Padding="10" CornerRadius="5" BackgroundColor="#eeeeee" ImageSource="https://cdn-icons-png.flaticon.com/128/3914/3914977.png"/>
                     <Button Grid.Column="6" Padding="10" CornerRadius="5" BackgroundColor="#eeeeee"/>
                 </Grid>
             </Grid>
@@ -152,12 +155,51 @@
 
     <!-- Add Button -->
     <ContentPage IconImageSource="https://cdn-icons-png.flaticon.com/512/3914/3914337.png"
-                 BackgroundColor="#BE6DAC">
+             BackgroundColor="#7853FA">
         <StackLayout Margin="20">
-            <!-- Your page contents -->
+            <!-- Page contents -->
+            <!-- Transaction Type -->
+            <Picker x:Name="TransactionTypePicker"
+        Title="Transaction Type">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Income</x:String>
+                        <x:String>Expense</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <!-- Date Picker -->
+            <DatePicker x:Name="TransactionDatePicker" 
+            Format="D"/>
+
+            <!-- Amount Entry -->
+            <Entry x:Name="AmountEntry" 
+       Placeholder="Enter Amount"
+       Keyboard="Numeric"/>
+
+            <!-- Category Picker -->
+            <Picker x:Name="CategoryPicker"
+        Title="Select Category">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Food</x:String>
+                        <x:String>Taxes</x:String>
+                        <x:String>Gasoline</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <!-- Add Category -->
+            <Button Text="Add Category"
+        Clicked="OnAddCategoryClicked"/>
+
+            <!-- Add Transaction Button -->
+            <Button Text="Add Transaction"
+        Clicked="OnAddTransactionClicked"/>
         </StackLayout>
     </ContentPage>
-
+    
     <!-- Analysis Button -->
     <ContentPage IconImageSource="https://cdn-icons-png.flaticon.com/512/3916/3916763.png">
         <StackLayout Margin="20">
@@ -167,6 +209,7 @@
     <!-- Account Button -->
     <ContentPage IconImageSource="https://cdn-icons-png.flaticon.com/128/3917/3917705.png">
         <StackLayout Margin="20">
+            <Button Text="Log Out" Clicked="OnLogOutClicked"/>
         </StackLayout>
     </ContentPage>
 </TabbedPage>

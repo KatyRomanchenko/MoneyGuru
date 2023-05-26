@@ -16,7 +16,7 @@ public class Category
 
     public double Budget { get; set; }
 
-    public double Percentage { get; set; }
+    //public double Percentage { get; set; }
 
     [Ignore]
     public List<Transaction> Transactions { get; set; }

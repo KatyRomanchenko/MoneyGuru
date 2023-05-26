@@ -30,7 +30,7 @@ namespace MoneyGuru
                 };
                 App.Database.Insert(newUser);
                 await DisplayAlert("Success", "User created successfully", "OK");
-                Application.Current.MainPage = new LoginEntryViewModel();
+                Application.Current.MainPage = new LoginEntryPage();
                 //await Navigation.PopAsync(); //go back to the login page
             }
             else
