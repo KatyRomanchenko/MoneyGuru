@@ -16,7 +16,7 @@ namespace MoneyGuru
         }
         private async void OnLoginClicked(object sender, EventArgs e)
         {
-            var user = App.Database.Table<User>().FirstOrDefault(x => x.Email == EmailEntry.Text);
+            var user = Database.db.Table<User>().FirstOrDefault(x => x.Email == EmailEntry.Text);
             if (user != null)
             {
                 if (user.Password == PasswordEntry.Text)  // Use hash comparison here
