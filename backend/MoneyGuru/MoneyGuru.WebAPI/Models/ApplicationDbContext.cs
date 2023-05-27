@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace MoneyGuruWebAPI.Models
+namespace MoneyGuru.WebAPI.Models
 {
     public class ApplicationDbContext : IdentityDbContext
     {

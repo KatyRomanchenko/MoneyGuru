@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 
-namespace MoneyGuruWebAPI.Models
+namespace MoneyGuru.WebAPI.Models
 {
     public class User : IdentityUser
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MoneyGuruWebAPI.Models
+namespace MoneyGuru.WebAPI.Models
 {
     public class Wallet
     {

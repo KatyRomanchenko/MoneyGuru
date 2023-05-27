@@ -1,6 +1,6 @@
 using System;
 
-namespace MoneyGuruWebAPI
+namespace MoneyGuru.WebAPI
 {
     public class WeatherForecast
     {

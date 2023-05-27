@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace MoneyGuruWebAPI.Migrations
+namespace MoneyGuru.WebAPI.Migrations
 {
     public partial class Init : Migration
     {

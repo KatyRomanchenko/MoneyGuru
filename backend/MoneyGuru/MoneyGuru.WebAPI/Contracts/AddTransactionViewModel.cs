@@ -5,11 +5,9 @@ using System.Text;
 
 namespace MoneyGuru.WebAPI
 {
-    public class SignInViewModel
+    public class AddTransactionViewModel
     {
         [Required]
-        [StringLength(50)]
-        [EmailAddress]
         public string Email { get; set; }
 
         [Required]
