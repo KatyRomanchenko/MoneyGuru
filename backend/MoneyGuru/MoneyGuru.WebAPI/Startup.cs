@@ -10,15 +10,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using MoneyGuruWebAPI.Models;
-using MoneyGuruWebAPI.Services;
+using MoneyGuru.WebAPI.Models;
+using MoneyGuru.WebAPI.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MoneyGuruWebAPI
+namespace MoneyGuru.WebAPI
 {
     public class Startup
     {

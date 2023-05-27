@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MoneyGuruWebAPI.Contracts;
-using MoneyGuruWebAPI.Services;
-using MoneyGuru.ViewModels;
+using MoneyGuru.WebAPI.Contracts;
+using MoneyGuru.WebAPI.Services;
 using System.Threading.Tasks;
 
 
-namespace MoneyGuruWebAPI.Controllers
+namespace MoneyGuru.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

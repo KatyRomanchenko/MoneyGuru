@@ -2,9 +2,8 @@
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using MoneyGuruWebAPI.Contracts;
-using MoneyGuruWebAPI.Models;
-using MoneyGuru.ViewModels;
+using MoneyGuru.WebAPI.Contracts;
+using MoneyGuru.WebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -13,7 +12,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MoneyGuruWebAPI.Services
+namespace MoneyGuru.WebAPI.Services
 {
     public interface IUserService
     {

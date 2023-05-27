@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MoneyGuruWebAPI.Contracts
+namespace MoneyGuru.WebAPI.Contracts
 {
     public class LoginViewModel
     {

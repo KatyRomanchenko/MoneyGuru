@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MoneyGuruWebAPI.Controllers
+namespace MoneyGuru.WebAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]

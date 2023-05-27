@@ -2,11 +2,9 @@
 using System;
 using System.Text;
 using MoneyGuru;
-using MoneyGuru.ViewModels;
-using MoneyGuruWebAPI;
-using MoneyGuruWebAPI.Contracts;
+using MoneyGuru.WebAPI;
 
-namespace MoneyGuruWebAPI.Contracts
+namespace MoneyGuru.WebAPI.Contracts
 {
     public class UserManagerResponse
     {

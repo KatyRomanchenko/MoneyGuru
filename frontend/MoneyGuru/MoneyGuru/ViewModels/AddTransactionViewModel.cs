@@ -7,6 +7,7 @@ using Xamarin.Forms;
 
 namespace MoneyGuru
 {
-    public class MainViewModel
-    { }
+    public class AddTransactionViewModel
+    {
+    }
 }
