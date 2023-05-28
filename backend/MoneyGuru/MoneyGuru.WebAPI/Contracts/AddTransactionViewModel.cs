@@ -8,14 +8,15 @@ namespace MoneyGuru.WebAPI
     public class AddTransactionViewModel
     {
         [Required]
-        public string Email { get; set; }
+        public string Category { get; set; }
+
+        [Required] 
+        public decimal Amount { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 5)]
-        public string Password { get; set; }
+        public string TransactionType { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 5)]
-        public string ConfirmPassword { get; set; }
+        public DateTime Date { get; set; }
     }
 }
