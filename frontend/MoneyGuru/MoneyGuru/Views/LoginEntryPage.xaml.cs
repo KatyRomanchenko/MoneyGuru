@@ -14,7 +14,7 @@ using System.Text;
 namespace MoneyGuru
 {
     public partial class LoginEntryPage 
-    { 
+    {
         public LoginEntryPage()
         {
             InitializeComponent();
@@ -51,14 +51,12 @@ namespace MoneyGuru
 
             if (responseObject.IsSuccess)
             {
-                // Frame.Navigate(typeof(MainPage), responseObject.Message);
-                Application.Current.MainPage = new MainPage();
+                Application.Current.MainPage = new MainPage(responseObject.Message);
             }
             else
             {
-                var message = responseObject.Message;
+                var message = "";
                 await DisplayAlert("Success", message, "OK");
-
             }
         }
     }

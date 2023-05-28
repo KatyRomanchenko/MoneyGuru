@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using MoneyGuru.WebAPI.Models;
 using MoneyGuru.WebAPI.Services;
 using System;
@@ -48,6 +49,14 @@ namespace MoneyGuru.WebAPI
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("vi", new OpenApiInfo
+                {
+                    Title = "MM API",
+                    Description = " bla bl"
+                });
+            });
             services.AddIdentity<User, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = true;
@@ -68,12 +77,12 @@ namespace MoneyGuru.WebAPI
                     ValidAudience = Configuration["AuthSettings:Audience"],
                     ValidIssuer = Configuration["AuthSettings:Issuer"],
                     RequireExpirationTime = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["AuthSettings:Key"])),
-                    ValidateIssuerSigningKey = true
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["AuthSettings:Key"]))
                 };
             });
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITransactionService, TransactionService>();
 
             services.AddControllers();
         }
@@ -87,11 +96,17 @@ namespace MoneyGuru.WebAPI
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
-
             app.UseCors(AllowAll);
 
+            app.UseAuthentication();
+
+            app.UseRouting();
+
             app.UseAuthorization();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/api/swagger", "MM Api"));
 
             app.UseEndpoints(endpoints =>
             {

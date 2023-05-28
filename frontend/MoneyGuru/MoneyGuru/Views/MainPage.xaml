@@ -159,15 +159,14 @@
         <StackLayout Margin="20">
             <!-- Page contents -->
             <!-- Transaction Type -->
-            <Picker x:Name="TransactionTypePicker"
-        Title="Transaction Type">
+            <!--<Picker x:Name="TransactionTypePicker" Title="Transaction Type">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Income</x:String>
                         <x:String>Expense</x:String>
                     </x:Array>
                 </Picker.ItemsSource>
-            </Picker>
+            </Picker>-->
 
             <!-- Date Picker -->
             <DatePicker x:Name="TransactionDatePicker" 
@@ -176,7 +175,8 @@
             <!-- Amount Entry -->
             <Entry x:Name="AmountEntry" 
        Placeholder="Enter Amount"
-       Keyboard="Numeric"/>
+       Keyboard="Numeric">
+            </Entry>
 
             <!-- Category Picker -->
             <Picker x:Name="CategoryPicker"
