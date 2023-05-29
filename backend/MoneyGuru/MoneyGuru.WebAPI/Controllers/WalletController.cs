@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using MoneyGuru.WebAPI;
+using MoneyGuru.WebAPI.Contracts;
+
 
 namespace MoneyGuru.WebAPI.Controllers
 {
@@ -31,7 +34,16 @@ namespace MoneyGuru.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetWalletsAsync()
         {
-            var wallet = await _walletService.GetWalletsAsync();
+            var wallets = await _walletService.GetWalletsAsync();
+
+            return Ok(wallets.Select(c => c.WalletName));
+
+        }
+
+        [HttpGet("{walletName}")]
+        public async Task<IActionResult> GetWalletByNameAsync(string walletName)
+        {
+            var wallet = await _walletService.GetWalletByNameAsync(walletName);
 
             if (wallet == null)
             {
@@ -40,25 +52,22 @@ namespace MoneyGuru.WebAPI.Controllers
 
             return Ok(wallet);
         }
+
         [HttpPut("{walletName}")]
-        public async Task<IActionResult> UpdateWalletAsync(string walletName, [FromBody] Wallet wallet)
+        public async Task<IActionResult> UpdateWalletAsync(string walletName, [FromBody] UpdateWalletViewModel model)
         {
-            // Make sure the wallet name in the URL matches the name in the body
-            if (walletName != wallet.WalletName)
+            var existingWallet = await _walletService.GetWalletByNameAsync(walletName);
+
+            if (existingWallet == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            try
-            {
-                await _walletService.UpdateWalletAsync(wallet);
-                return Ok();
-            }
-            catch
-            {
-                // If an exception is thrown, return a 500 status
-                return StatusCode(500);
-            }
+            existingWallet.AmountOfMoney = model.AmountOfMoney;
+
+            await _walletService.UpdateWalletAsync(existingWallet);
+
+            return Ok(existingWallet);
         }
     }
 }

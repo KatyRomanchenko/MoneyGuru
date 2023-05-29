@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using MoneyGuru.Services;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using MoneyGuru.Data;
 
 namespace MoneyGuru
 {
@@ -19,6 +20,10 @@ namespace MoneyGuru
         public AddTransactionPage()
         {
             InitializeComponent();
+        }
+        public class UpdateWalletViewModel
+        {
+            public decimal AmountOfMoney { get; set; }
         }
         private async void OnAddTransactionClicked(object sender, EventArgs e)
         {
@@ -32,9 +37,10 @@ namespace MoneyGuru
                 TransactionName = EntryName.Text,
                 Amount = amount,
                 Date = TransactionDatePicker.Date,
-                //Category = CategoryPicker.SelectedItem.ToString(),
+                Category = CategoryPicker.SelectedItem.ToString(),
                 Wallet = WalletPicker.SelectedItem.ToString(),
             };
+
             var jsonData = JsonConvert.SerializeObject(newTransaction);
 
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -43,16 +49,48 @@ namespace MoneyGuru
 
             if (response.IsSuccessStatusCode)
             {
-                // HERE SYSTEM SHOULD FING and GET "AmountOfWallet" from API by "Wallet " name AND DO: newAmountOfMoney = "AmountOfMoney"(From API) - amount (from newTransaction), and PUT newAmountOfMoney instead "AmountOfMoney"(From API)
-                await DisplayAlert("Success", "Transaction added successfully", "OK");
+                var walletResponse = await client.GetAsync($"http://192.168.1.3:5000/api/wallet/{newTransaction.Wallet}");
+
+                if (walletResponse.IsSuccessStatusCode)
+                {
+                    var walletData = await walletResponse.Content.ReadAsStringAsync();
+                    var wallet = JsonConvert.DeserializeObject<Wallet>(walletData);
+
+                    decimal newAmountOfMoney = wallet.AmountOfMoney - amount;
+
+                    var updatedWallet = new Wallet
+                    {
+                        WalletName = wallet.WalletName,
+                        AmountOfMoney = newAmountOfMoney
+                    };
+
+                    var updatedWalletJson = JsonConvert.SerializeObject(updatedWallet);
+                    var walletUpdateContent = new StringContent(updatedWalletJson, Encoding.UTF8, "application/json");
+
+                    var updateResponse = await client.PutAsync($"http://192.168.1.3:5000/api/wallet/{updatedWallet.WalletName}", walletUpdateContent);
+
+                    if (updateResponse.IsSuccessStatusCode)
+                    {
+                        await DisplayAlert("Success", "Transaction added successfully", "OK");
+                    }
+                    else
+                    {
+                        await DisplayAlert("Error", "Could not update wallet", "OK");
+                    }
+                }
+                else
+                {
+                    await DisplayAlert("Error", "Could not fetch wallet", "OK");
+                }
             }
             else
             {
-                var messageEx = "Error occurred";
-                await DisplayAlert("Error", messageEx, "OK");
-                return;
+                var errorMessage = "Error occurred";
+                await DisplayAlert("Error", errorMessage, "OK");
             }
         }
+
+
         private async void OnGoBackClicked(object sender, EventArgs e)
         {
             Application.Current.MainPage = new NavigationPage(new MainPage())
