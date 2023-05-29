@@ -10,6 +10,7 @@ using MoneyGuru;
 using MoneyGuru.ViewModels;
 using Newtonsoft.Json;
 using System.Text;
+using MoneyGuru.Services;
 
 namespace MoneyGuru
 {
@@ -21,17 +22,8 @@ namespace MoneyGuru
         }
         private async void OnLoginClicked(object sender, EventArgs e)
         {
-            //DIRTYHACK. Remove before production
-
-            var handler = new HttpClientHandler();
-            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-            handler.ServerCertificateCustomValidationCallback =
-                (httpRequestMessage, cert, cetChain, policyErrors) =>
-                {
-                    return true;
-                };
-
-            HttpClient client = new HttpClient(handler);
+            HttpClientFactory httpClientFactory = new HttpClientFactory();
+            HttpClient client = httpClientFactory.CreateAuthenticatedClient();
 
             var model = new LoginEntryViewModel
             {
@@ -51,13 +43,21 @@ namespace MoneyGuru
 
             if (responseObject.IsSuccess)
             {
-                Application.Current.MainPage = new MainPage(responseObject.Message);
+                Application.Current.MainPage = new MainPage();
             }
             else
             {
                 var message = "";
                 await DisplayAlert("Success", message, "OK");
             }
+        }
+        private async void OnBackButtonClicked(object sender, EventArgs e)
+        {
+            Application.Current.MainPage = new NavigationPage(new PrestartPage())
+            {
+                BarBackgroundColor = Color.FromHex("#7853FA"),
+                BarTextColor = Color.Black
+            };
         }
     }
 }

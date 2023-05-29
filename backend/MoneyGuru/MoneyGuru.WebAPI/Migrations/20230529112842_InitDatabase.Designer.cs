@@ -10,8 +10,8 @@ using MoneyGuru.WebAPI.Models;
 namespace MoneyGuru.WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230526150244_Init")]
-    partial class Init
+    [Migration("20230529112842_InitDatabase")]
+    partial class InitDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -223,7 +223,7 @@ namespace MoneyGuru.WebAPI.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("MoneyGuruWebAPI.Models.Category", b =>
+            modelBuilder.Entity("MoneyGuru.WebAPI.Models.Category", b =>
                 {
                     b.Property<int>("CategoryID")
                         .ValueGeneratedOnAdd()
@@ -232,6 +232,9 @@ namespace MoneyGuru.WebAPI.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -243,7 +246,7 @@ namespace MoneyGuru.WebAPI.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("MoneyGuruWebAPI.Models.Goal", b =>
+            modelBuilder.Entity("MoneyGuru.WebAPI.Models.Goal", b =>
                 {
                     b.Property<int>("GoalID")
                         .ValueGeneratedOnAdd()
@@ -266,7 +269,7 @@ namespace MoneyGuru.WebAPI.Migrations
                     b.ToTable("Goals");
                 });
 
-            modelBuilder.Entity("MoneyGuruWebAPI.Models.Transaction", b =>
+            modelBuilder.Entity("MoneyGuru.WebAPI.Models.Transaction", b =>
                 {
                     b.Property<int>("TransactionID")
                         .ValueGeneratedOnAdd()
@@ -276,11 +279,14 @@ namespace MoneyGuru.WebAPI.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("CategoryID")
-                        .HasColumnType("int");
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("TransactionName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TransactionType")
                         .HasColumnType("nvarchar(max)");
@@ -290,14 +296,12 @@ namespace MoneyGuru.WebAPI.Migrations
 
                     b.HasKey("TransactionID");
 
-                    b.HasIndex("CategoryID");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("Transactions");
                 });
 
-            modelBuilder.Entity("MoneyGuruWebAPI.Models.Wallet", b =>
+            modelBuilder.Entity("MoneyGuru.WebAPI.Models.Wallet", b =>
                 {
                     b.Property<int>("WalletID")
                         .ValueGeneratedOnAdd()
@@ -323,7 +327,7 @@ namespace MoneyGuru.WebAPI.Migrations
                     b.ToTable("Wallets");
                 });
 
-            modelBuilder.Entity("MoneyGuruWebAPI.Models.User", b =>
+            modelBuilder.Entity("MoneyGuru.WebAPI.Models.User", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
@@ -384,34 +388,30 @@ namespace MoneyGuru.WebAPI.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MoneyGuruWebAPI.Models.Category", b =>
+            modelBuilder.Entity("MoneyGuru.WebAPI.Models.Category", b =>
                 {
-                    b.HasOne("MoneyGuruWebAPI.Models.User", "User")
+                    b.HasOne("MoneyGuru.WebAPI.Models.User", null)
                         .WithMany("Categories")
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("MoneyGuruWebAPI.Models.Goal", b =>
+            modelBuilder.Entity("MoneyGuru.WebAPI.Models.Goal", b =>
                 {
-                    b.HasOne("MoneyGuruWebAPI.Models.User", "User")
+                    b.HasOne("MoneyGuru.WebAPI.Models.User", "User")
                         .WithMany("Goals")
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("MoneyGuruWebAPI.Models.Transaction", b =>
+            modelBuilder.Entity("MoneyGuru.WebAPI.Models.Transaction", b =>
                 {
-                    b.HasOne("MoneyGuruWebAPI.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryID");
-
-                    b.HasOne("MoneyGuruWebAPI.Models.User", "User")
+                    b.HasOne("MoneyGuru.WebAPI.Models.User", "User")
                         .WithMany("Transactions")
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("MoneyGuruWebAPI.Models.Wallet", b =>
+            modelBuilder.Entity("MoneyGuru.WebAPI.Models.Wallet", b =>
                 {
-                    b.HasOne("MoneyGuruWebAPI.Models.User", "User")
+                    b.HasOne("MoneyGuru.WebAPI.Models.User", "User")
                         .WithMany("Wallets")
                         .HasForeignKey("UserId");
                 });

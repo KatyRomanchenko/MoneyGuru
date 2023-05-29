@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="MoneyGuru.AddWalletPage">
+
+    <StackLayout Margin="20">
+        <Label Text="Add Wallet" FontSize="25" HorizontalOptions="CenterAndExpand" VerticalOptions="Start"/>
+
+        <Entry x:Name="WalletNameEntry" Placeholder="Enter Wallet Name"/>
+        <Entry x:Name="AmountOfMoney" Placeholder="Enter money amount" Keyboard="Numeric"/>
+        <Picker x:Name="WalletTypePicker" Title="Select Transaction Type">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Cash</x:String>
+                    <x:String>Card</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Button Text="Submit" Clicked="OnSubmitClicked"/>
+        <Button Text="Go Back" Clicked="OnGoBackClicked"/>
+    </StackLayout>
+
+</ContentPage>

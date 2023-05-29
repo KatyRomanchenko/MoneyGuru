@@ -19,12 +19,20 @@ namespace MoneyGuru
 
         private async void OnLogInClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new LoginEntryPage());
+            Application.Current.MainPage = new NavigationPage(new LoginEntryPage())
+            {
+                BarBackgroundColor = Color.FromHex("#7853FA"),
+                BarTextColor = Color.Black
+            };
         }
 
         private async void OnSignUpClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SignInPage());
+            Application.Current.MainPage = new NavigationPage(new SignInPage())
+            {
+                BarBackgroundColor = Color.FromHex("#7853FA"),
+                BarTextColor = Color.Black
+            };
         }
     }
 }

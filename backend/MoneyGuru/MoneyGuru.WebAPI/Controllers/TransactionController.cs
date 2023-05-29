@@ -10,7 +10,7 @@ namespace MoneyGuru.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class TransactionController : ControllerBase
     {
         private readonly ITransactionService _transactionService;
@@ -22,20 +22,22 @@ namespace MoneyGuru.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddTransactionAsync([FromBody] AddTransactionViewModel model)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            await _transactionService.AddTransactionAsync(model, userId.ToString());
+            await _transactionService.AddTransactionAsync(model);
 
             return Ok();
         }
 
         [HttpGet]
-
-        public async Task<IActionResult> GetAsync()
+        public async Task<IActionResult> GetTransactionsAsync()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var transactions = await _transactionService.GetTransactionsAsync();
 
-            return Ok(new List<Guid> { Guid.NewGuid() });
+            if (transactions == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(transactions);
         }
     }
 }

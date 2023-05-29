@@ -26,11 +26,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\AddWalletPage.xaml.cs">
+      <DependentUpon>AddWalletPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\AddTransactionPage.xaml.cs">
       <DependentUpon>AddTransactionPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\AddCategoryPage.xaml.cs">
       <DependentUpon>AddCategoryPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\CalculationPage.xaml.cs">
+      <DependentUpon>CalculationPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
 </Project>

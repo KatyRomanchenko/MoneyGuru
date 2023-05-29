@@ -14,9 +14,9 @@ using MoneyGuru.Services;
 
 namespace MoneyGuru
 {
-    public partial class AddCategoryPage
+    public partial class AddWalletPage
     {
-        public AddCategoryPage()
+        public AddWalletPage()
         {
             InitializeComponent();
         }
@@ -25,16 +25,21 @@ namespace MoneyGuru
             HttpClientFactory httpClientFactory = new HttpClientFactory();
             HttpClient client = httpClientFactory.CreateAuthenticatedClient();
 
-            var newCategory = new AddCategoryViewModel
+            decimal amountOfMoney = Convert.ToDecimal(AmountOfMoney.Text);
+
+
+            var newWallet = new AddWalletViewModel
             {
-                Name = CategoryEntry.Text
+                WalletName = WalletNameEntry.Text,
+                AmountOfMoney = amountOfMoney,
+                Type = WalletTypePicker.SelectedItem.ToString()
             };
 
-            var jsonData = JsonConvert.SerializeObject(newCategory);
+            var jsonData = JsonConvert.SerializeObject(newWallet);
 
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync("http://192.168.1.3:5000/api/category", content);
+            var response = await client.PostAsync("http://192.168.1.3:5000/api/wallet", content);
 
             if (response.IsSuccessStatusCode)
             {

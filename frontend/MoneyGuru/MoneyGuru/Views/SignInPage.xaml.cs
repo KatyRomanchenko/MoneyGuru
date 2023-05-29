@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
 using MoneyGuru.Views;
+using MoneyGuru.Services;
 
 namespace MoneyGuru
 {
@@ -21,18 +22,8 @@ namespace MoneyGuru
 
         private async void OnRegisterClicked(object sender, EventArgs e)
         {
-            //DIRTYHACK. Remove before production
-
-            var handler = new HttpClientHandler();
-            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-            handler.ServerCertificateCustomValidationCallback =
-                (httpRequestMessage, cert, cetChain, policyErrors) =>
-                {
-                    return true;
-                };
-
-
-            HttpClient client = new HttpClient(handler);
+            HttpClientFactory httpClientFactory = new HttpClientFactory();
+            HttpClient client = httpClientFactory.CreateAuthenticatedClient();
 
             var newUser = new SignInViewModel
             {
@@ -67,7 +58,11 @@ namespace MoneyGuru
         }
         private async void OnBackButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PopAsync();
+            Application.Current.MainPage = new NavigationPage(new PrestartPage())
+            {
+                BarBackgroundColor = Color.FromHex("#7853FA"),
+                BarTextColor = Color.Black
+            };
         }
     }
 }

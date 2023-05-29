@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
 
-namespace MoneyGuru.WebAPI.Models
+namespace MoneyGuru.WebAPI
 {
-    public class Category
+    public class AddCategoryViewModel
     {
-        public int CategoryID { get; set; }
-        //public User User { get; set; }
+        [Required]
         public string Name { get; set; }
+
         public decimal TotalAmount { get; set; }
     }
 }
