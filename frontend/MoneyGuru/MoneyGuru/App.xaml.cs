@@ -12,7 +12,7 @@ namespace MoneyGuru
         {
             MainPage = new NavigationPage(new PrestartPage()) 
             {
-                BarBackgroundColor = Color.FromHex("#FFFFFF")
+                BarBackgroundColor = Color.FromHex("#7853FA")
             };
         }
     }

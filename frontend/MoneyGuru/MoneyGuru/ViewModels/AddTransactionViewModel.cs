@@ -12,6 +12,7 @@ namespace MoneyGuru
     {
         [Required]
         public string Category { get; set; }
+        public string TransactionName { get; set; }
 
         [Required]
         public decimal Amount { get; set; }
@@ -19,7 +20,7 @@ namespace MoneyGuru
         [Required]
         public string TransactionType { get; set; }
 
-        [Required]
+        //[Required]
         public DateTime Date { get; set; }
     }
 

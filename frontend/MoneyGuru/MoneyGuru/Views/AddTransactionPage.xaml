@@ -1,7 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:MoneyGuru"
              x:Class="MoneyGuru.AddTransactionPage">
-    <StackLayout>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:CategoryViewModel x:Key="viewModel" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout Margin="20">
+
+        <!-- Name Entry -->
+        <Entry x:Name="EntryName" 
+       Placeholder="Enter Name of your transaction">
+        </Entry>
+
+        <!-- Date Picker -->
+            <DatePicker x:Name="TransactionDatePicker" 
+            Format="D"/>
+
+            <!-- Amount Entry -->
+            <Entry x:Name="AmountEntry" 
+       Placeholder="Enter Amount"
+       Keyboard="Numeric">
+            </Entry>
+
+            <!-- Category Picker -->
+        <Picker x:Name="CategoryPicker"
+                Title="Select Category"
+                ItemsSource="{Binding Categories, Source={StaticResource viewModel}}">
+        </Picker>
+
+        <!-- Add Transaction Button -->
+            <Button Text="Add Transaction"
+        Clicked="OnAddTransactionClicked"/>
+        <Button Text="Go Back" Clicked="OnGoBackClicked"/>
+
     </StackLayout>
 </ContentPage>

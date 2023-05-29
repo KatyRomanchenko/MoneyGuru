@@ -83,6 +83,7 @@ namespace MoneyGuru.WebAPI
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITransactionService, TransactionService>();
+            services.AddScoped<ICategoryService, CategoryService>();
 
             services.AddControllers();
         }

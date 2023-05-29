@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
 using MoneyGuru.Views;
+using MoneyGuru;
+using MoneyGuru.Services;
 
 namespace MoneyGuru
 {
@@ -18,9 +20,46 @@ namespace MoneyGuru
         {
             InitializeComponent();
         }
-
-        private async void OnAddCategoryClicked(object sender, EventArgs e)
+        private async void OnSubmitClicked(object sender, EventArgs e)
         {
+            HttpClientFactory httpClientFactory = new HttpClientFactory();
+            HttpClient client = httpClientFactory.CreateAuthenticatedClient();
+
+            var newCategory = new AddCategoryViewModel
+            {
+                Name = CategoryEntry.Text
+            };
+
+            var jsonData = JsonConvert.SerializeObject(newCategory);
+
+            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync("http://192.168.1.3:5000/api/category", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                await DisplayAlert("Success", "Category added successfully", "OK");
+                Application.Current.MainPage = new NavigationPage(new MainPage())
+                {
+                    BarBackgroundColor = Color.FromHex("#7853FA"),
+                    BarTextColor = Color.Black
+                };
+            }
+            else
+            {
+                var messageEx = "Something went wrong";
+                await DisplayAlert("Error", messageEx, "OK");
+                return;
+            }
+        }
+        private async void OnGoBackClicked(object sender, EventArgs e)
+        {
+            Application.Current.MainPage = new NavigationPage(new MainPage())
+            {
+                BarBackgroundColor = Color.FromHex("#7853FA"),
+                BarTextColor = Color.Black
+            };
+            Application.Current.MainPage.Title = "MAIN DASHBOARD";
         }
     }
 }
