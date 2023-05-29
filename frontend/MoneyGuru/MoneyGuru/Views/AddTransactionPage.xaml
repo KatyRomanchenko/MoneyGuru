@@ -4,7 +4,8 @@
              x:Class="MoneyGuru.AddTransactionPage">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <local:CategoryViewModel x:Key="viewModel" />
+            <local:CategoryViewModel x:Key="CategoryViewModel" />
+            <local:WalletViewModel x:Key="WalletViewModel" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout Margin="20">
@@ -27,7 +28,14 @@
             <!-- Category Picker -->
         <Picker x:Name="CategoryPicker"
                 Title="Select Category"
-                ItemsSource="{Binding Categories, Source={StaticResource viewModel}}">
+                ItemsSource="{Binding Categories, Source={StaticResource CategoryViewModel}}">
+        </Picker>
+
+            <!-- Wallet Picker -->
+
+        <Picker x:Name="WalletPicker"
+                Title="Select Category"
+                ItemsSource="{Binding Wallets, Source={StaticResource WalletViewModel}}">
         </Picker>
 
         <!-- Add Transaction Button -->

@@ -35,6 +35,9 @@
     <Compile Update="Views\CalculationPage.xaml.cs">
       <DependentUpon>CalculationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\AddWalletPage.xaml.cs">
+      <DependentUpon>AddWalletPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

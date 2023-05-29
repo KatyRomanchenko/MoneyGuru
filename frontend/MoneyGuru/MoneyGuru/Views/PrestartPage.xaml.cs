@@ -1,5 +1,4 @@
 ﻿using MoneyGuru.ViewModels;
-using MoneyGuru.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;

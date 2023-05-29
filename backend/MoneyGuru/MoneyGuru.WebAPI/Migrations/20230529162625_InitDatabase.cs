@@ -203,6 +203,7 @@ namespace MoneyGuru.WebAPI.Migrations
                     TransactionID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TransactionName = table.Column<string>(nullable: true),
+                    Wallet = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true),
                     Category = table.Column<string>(nullable: true),
                     Amount = table.Column<decimal>(nullable: false),
@@ -227,9 +228,9 @@ namespace MoneyGuru.WebAPI.Migrations
                     WalletID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Type = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true),
                     AmountOfMoney = table.Column<decimal>(nullable: false),
-                    WalletName = table.Column<string>(nullable: true)
+                    WalletName = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

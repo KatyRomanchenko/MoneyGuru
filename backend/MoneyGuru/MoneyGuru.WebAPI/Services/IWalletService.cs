@@ -17,6 +17,8 @@ namespace MoneyGuru.WebAPI.Services
     {
         Task AddWalletAsync(AddWalletViewModel model);
         Task<List<Wallet>> GetWalletsAsync();
+        Task<Wallet> GetWalletByNameAsync(string walletName);
+        Task UpdateWalletAsync(Wallet wallet);
     }
 
     public class WalletService : IWalletService
@@ -46,6 +48,16 @@ namespace MoneyGuru.WebAPI.Services
         public async Task<List<Wallet>> GetWalletsAsync()
         {
             return await _context.Wallets.ToListAsync();
+        }
+        public async Task<Wallet> GetWalletByNameAsync(string walletName)
+        {
+            return await _context.Wallets.FirstOrDefaultAsync(w => w.WalletName == walletName);
+        }
+
+        public async Task UpdateWalletAsync(Wallet wallet)
+        {
+            _context.Wallets.Update(wallet);
+            await _context.SaveChangesAsync();
         }
     }
 }

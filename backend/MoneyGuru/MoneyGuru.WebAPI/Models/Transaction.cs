@@ -7,6 +7,7 @@ namespace MoneyGuru.WebAPI.Models
     {
         public int TransactionID { get; set; }
         public string TransactionName { get; set; }
+        public string Wallet { get; set; }
         public User User { get; set; }
         public string Category { get; set; }
         public decimal Amount { get; set; }

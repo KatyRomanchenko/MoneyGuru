@@ -8,8 +8,9 @@ using MoneyGuru.ViewModels;
 using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
-using MoneyGuru.Views;
 using MoneyGuru.Services;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace MoneyGuru
 {
@@ -31,9 +32,9 @@ namespace MoneyGuru
                 TransactionName = EntryName.Text,
                 Amount = amount,
                 Date = TransactionDatePicker.Date,
-                Category = CategoryPicker.SelectedItem.ToString()
+                //Category = CategoryPicker.SelectedItem.ToString(),
+                Wallet = WalletPicker.SelectedItem.ToString(),
             };
-
             var jsonData = JsonConvert.SerializeObject(newTransaction);
 
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -42,11 +43,11 @@ namespace MoneyGuru
 
             if (response.IsSuccessStatusCode)
             {
-                 await DisplayAlert("Success", "Transaction added successfully", "OK");
+                // HERE SYSTEM SHOULD FING and GET "AmountOfWallet" from API by "Wallet " name AND DO: newAmountOfMoney = "AmountOfMoney"(From API) - amount (from newTransaction), and PUT newAmountOfMoney instead "AmountOfMoney"(From API)
+                await DisplayAlert("Success", "Transaction added successfully", "OK");
             }
             else
             {
-                //await DisplayAlert("Error", "Invalid transaction type selected", "OK");
                 var messageEx = "Error occurred";
                 await DisplayAlert("Error", messageEx, "OK");
                 return;

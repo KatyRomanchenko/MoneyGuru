@@ -292,6 +292,9 @@ namespace MoneyGuru.WebAPI.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Wallet")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("TransactionID");
 
                     b.HasIndex("UserId");
@@ -409,7 +412,7 @@ namespace MoneyGuru.WebAPI.Migrations
 
             modelBuilder.Entity("MoneyGuru.WebAPI.Models.Wallet", b =>
                 {
-                    b.HasOne("MoneyGuru.WebAPI.Models.User", "User")
+                    b.HasOne("MoneyGuru.WebAPI.Models.User", null)
                         .WithMany("Wallets")
                         .HasForeignKey("UserId");
                 });

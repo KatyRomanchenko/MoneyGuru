@@ -41,7 +41,7 @@ namespace MoneyGuru
 
         private async void OnAddWalletClicked(object sender, EventArgs e)
         {
-            //Application.Current.MainPage = new NavigationPage(new AddTransactionPage());
+            Application.Current.MainPage = new NavigationPage(new AddWalletPage());
         }
 
         private async void OnAddIncomeClicked(object sender, EventArgs e)

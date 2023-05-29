@@ -39,7 +39,8 @@ namespace MoneyGuru.WebAPI.Services
                 TransactionName = model.TransactionName,
                 Amount = model.Amount,
                 Date = model.Date,
-                Category = model.Category
+                Category = model.Category,
+                Wallet = model.Wallet,
             };
 
             await _context.Transactions.AddAsync(transaction);
@@ -54,7 +55,8 @@ namespace MoneyGuru.WebAPI.Services
                     TransactionName = t.TransactionName,
                     Amount = t.Amount,
                     Date = t.Date,
-                    Category = t.Category
+                    Category = t.Category,
+                    Wallet = t.Wallet,
                 })
                 .ToListAsync();
         }

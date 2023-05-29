@@ -10,7 +10,7 @@ using MoneyGuru.WebAPI.Models;
 namespace MoneyGuru.WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230529112842_InitDatabase")]
+    [Migration("20230529162625_InitDatabase")]
     partial class InitDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -294,6 +294,9 @@ namespace MoneyGuru.WebAPI.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Wallet")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("TransactionID");
 
                     b.HasIndex("UserId");
@@ -411,7 +414,7 @@ namespace MoneyGuru.WebAPI.Migrations
 
             modelBuilder.Entity("MoneyGuru.WebAPI.Models.Wallet", b =>
                 {
-                    b.HasOne("MoneyGuru.WebAPI.Models.User", "User")
+                    b.HasOne("MoneyGuru.WebAPI.Models.User", null)
                         .WithMany("Wallets")
                         .HasForeignKey("UserId");
                 });
