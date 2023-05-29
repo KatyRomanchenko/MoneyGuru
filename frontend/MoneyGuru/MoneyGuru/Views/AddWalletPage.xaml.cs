@@ -9,46 +9,50 @@ using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
 using MoneyGuru.Views;
+using MoneyGuru;
 using MoneyGuru.Services;
 
 namespace MoneyGuru
 {
-    public partial class AddTransactionPage
+    public partial class AddWalletPage
     {
-        public AddTransactionPage()
+        public AddWalletPage()
         {
             InitializeComponent();
         }
-        private async void OnAddTransactionClicked(object sender, EventArgs e)
+        private async void OnSubmitClicked(object sender, EventArgs e)
         {
             HttpClientFactory httpClientFactory = new HttpClientFactory();
             HttpClient client = httpClientFactory.CreateAuthenticatedClient();
 
-            decimal amount = Convert.ToDecimal(AmountEntry.Text);
-            var newTransaction = new AddTransactionViewModel
+            decimal amountOfMoney = Convert.ToDecimal(AmountOfMoney.Text);
+
+
+            var newWallet = new AddWalletViewModel
             {
-                TransactionType = "Income",
-                TransactionName = EntryName.Text,
-                Amount = amount,
-                Date = TransactionDatePicker.Date,
-                Category = CategoryPicker.SelectedItem.ToString(),
-                Wallet = "Cash"
+                WalletName = WalletNameEntry.Text,
+                AmountOfMoney = amountOfMoney,
+                Type = WalletTypePicker.SelectedItem.ToString()
             };
 
-            var jsonData = JsonConvert.SerializeObject(newTransaction);
+            var jsonData = JsonConvert.SerializeObject(newWallet);
 
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync("http://192.168.1.3:5000/api/transaction", content);
+            var response = await client.PostAsync("http://192.168.1.3:5000/api/wallet", content);
 
             if (response.IsSuccessStatusCode)
             {
-                 await DisplayAlert("Success", "Transaction added successfully", "OK");
+                await DisplayAlert("Success", "Category added successfully", "OK");
+                Application.Current.MainPage = new NavigationPage(new MainPage())
+                {
+                    BarBackgroundColor = Color.FromHex("#7853FA"),
+                    BarTextColor = Color.Black
+                };
             }
             else
             {
-                //await DisplayAlert("Error", "Invalid transaction type selected", "OK");
-                var messageEx = "Error occurred";
+                var messageEx = "Something went wrong";
                 await DisplayAlert("Error", messageEx, "OK");
                 return;
             }

@@ -10,6 +10,9 @@ namespace MoneyGuru.WebAPI
         [Required]
         public string Category { get; set; }
 
+        [Required]
+        public string Wallet { get; set; }
+
         public string TransactionName { get; set; }
 
         [Required] 

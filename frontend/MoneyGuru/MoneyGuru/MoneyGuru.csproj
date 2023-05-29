@@ -26,6 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\AddWalletPage.xaml.cs">
+      <DependentUpon>AddWalletPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\AddTransactionPage.xaml.cs">
       <DependentUpon>AddTransactionPage.xaml</DependentUpon>
     </Compile>
