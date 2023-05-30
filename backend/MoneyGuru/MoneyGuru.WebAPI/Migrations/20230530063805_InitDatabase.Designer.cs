@@ -10,7 +10,7 @@ using MoneyGuru.WebAPI.Models;
 namespace MoneyGuru.WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230529162625_InitDatabase")]
+    [Migration("20230530063805_InitDatabase")]
     partial class InitDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

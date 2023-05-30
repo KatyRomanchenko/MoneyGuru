@@ -15,8 +15,8 @@ namespace MoneyGuru
 {
     public class WalletViewModel : INotifyPropertyChanged
     {
-        private List<string> _wallets;
-        public List<string> Wallets
+        private List<Wallet> _wallets;
+        public List<Wallet> Wallets
         {
             get { return _wallets; }
             set
@@ -26,9 +26,39 @@ namespace MoneyGuru
             }
         }
 
+        private List<string> _walletsNames;
+        public List<string> WalletsNames
+
+
+        {
+            get { return _walletsNames; }
+            set
+            {
+                _walletsNames = value;
+                OnPropertyChanged("WalletsNames");
+            }
+        }
+
         public WalletViewModel()
         {
+            GetWalletsNames();
             GetWallets();
+        }
+
+        public async void GetWalletsNames()
+        {
+            HttpClientFactory httpClientFactory = new HttpClientFactory();
+            HttpClient client = httpClientFactory.CreateAuthenticatedClient();
+
+            var uri = new Uri("http://192.168.1.3:5000/api/wallet/getNames");
+            var response = await client.GetAsync(uri);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var walletsNames = JsonConvert.DeserializeObject<List<string>>(content);
+                WalletsNames = walletsNames;
+            }
         }
 
         public async void GetWallets()
@@ -42,7 +72,7 @@ namespace MoneyGuru
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                var wallets = JsonConvert.DeserializeObject<List<string>>(content);
+                var wallets = JsonConvert.DeserializeObject<List<Wallet>>(content);
                 Wallets = wallets;
             }
         }

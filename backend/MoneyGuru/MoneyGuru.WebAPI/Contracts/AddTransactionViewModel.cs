@@ -7,7 +7,6 @@ namespace MoneyGuru.WebAPI
 {
     public class AddTransactionViewModel
     {
-        [Required]
         public string Category { get; set; }
 
         [Required]

@@ -53,11 +53,26 @@ namespace MoneyGuru
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                var settings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }; // Add this line
-                var transactionsList = JsonConvert.DeserializeObject<List<Transaction>>(content, settings); // Update this line
+                var settings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
+                var transactionsList = JsonConvert.DeserializeObject<List<Transaction>>(content, settings);
+
+                foreach (var transaction in transactionsList)
+                {
+                    if (transaction.TransactionType == "Expense")
+                    {
+                        transaction.Amount = -Math.Abs(transaction.Amount);  // Ensure the amount is negative
+                    }
+                    else if (transaction.TransactionType == "Income")
+                    {
+                        transaction.Amount = Math.Abs(transaction.Amount);  // Ensure the amount is positive
+                        transaction.Category = "Income";
+                    }
+                }
+
                 Transactions = new ObservableCollection<Transaction>(transactionsList);
             }
         }
+
 
     }
 }

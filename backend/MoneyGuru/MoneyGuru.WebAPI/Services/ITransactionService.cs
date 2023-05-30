@@ -57,6 +57,7 @@ namespace MoneyGuru.WebAPI.Services
                     Date = t.Date,
                     Category = t.Category,
                     Wallet = t.Wallet,
+                    TransactionType = t.TransactionType,
                 })
                 .ToListAsync();
         }

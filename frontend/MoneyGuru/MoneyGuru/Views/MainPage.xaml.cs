@@ -46,7 +46,7 @@ namespace MoneyGuru
 
         private async void OnAddIncomeClicked(object sender, EventArgs e)
         {
-            //Application.Current.MainPage = new NavigationPage(new AddTransactionPage());
+            Application.Current.MainPage = new NavigationPage(new AddIncomePage());
         }
         private async void OnCreateGoalClicked(object sender, EventArgs e)// To add GOALS logic
         {

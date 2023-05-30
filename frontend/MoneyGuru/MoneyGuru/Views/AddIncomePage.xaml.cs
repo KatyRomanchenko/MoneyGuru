@@ -15,9 +15,9 @@ using MoneyGuru.Data;
 
 namespace MoneyGuru
 {
-    public partial class AddTransactionPage
+    public partial class AddIncomePage
     {
-        public AddTransactionPage()
+        public AddIncomePage()
         {
             InitializeComponent();
         }
@@ -25,23 +25,23 @@ namespace MoneyGuru
         {
             public decimal AmountOfMoney { get; set; }
         }
-        private async void OnAddTransactionClicked(object sender, EventArgs e)
+        private async void OnAddIncomeClicked(object sender, EventArgs e)
         {
             HttpClientFactory httpClientFactory = new HttpClientFactory();
             HttpClient client = httpClientFactory.CreateAuthenticatedClient();
 
             decimal amount = Convert.ToDecimal(AmountEntry.Text);
-            var newTransaction = new AddTransactionViewModel
+            var newIncome = new AddTransactionViewModel
             {
-                TransactionType = "Expense",
+                TransactionType = "Income",
                 TransactionName = EntryName.Text,
                 Amount = amount,
                 Date = TransactionDatePicker.Date,
-                Category = CategoryPicker.SelectedItem.ToString(),
+                Category = null,
                 Wallet = WalletPicker.SelectedItem.ToString(),
             };
 
-            var jsonData = JsonConvert.SerializeObject(newTransaction);
+            var jsonData = JsonConvert.SerializeObject(newIncome);
 
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
@@ -49,14 +49,14 @@ namespace MoneyGuru
 
             if (response.IsSuccessStatusCode)
             {
-                var walletResponse = await client.GetAsync($"http://192.168.1.3:5000/api/wallet/{newTransaction.Wallet}");
+                var walletResponse = await client.GetAsync($"http://192.168.1.3:5000/api/wallet/{newIncome.Wallet}");
 
                 if (walletResponse.IsSuccessStatusCode)
                 {
                     var walletData = await walletResponse.Content.ReadAsStringAsync();
                     var wallet = JsonConvert.DeserializeObject<Wallet>(walletData);
 
-                    decimal newAmountOfMoney = wallet.AmountOfMoney - amount;
+                    decimal newAmountOfMoney = wallet.AmountOfMoney + amount;
 
                     var updatedWallet = new Wallet
                     {

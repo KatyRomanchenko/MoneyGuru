@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:MoneyGuru"
-             x:Class="MoneyGuru.AddTransactionPage">
+             x:Class="MoneyGuru.AddIncomePage">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <local:CategoryViewModel x:Key="CategoryViewModel" />
             <local:WalletViewModel x:Key="WalletViewModel" />
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -12,7 +11,7 @@
 
         <!-- Name Entry -->
         <Entry x:Name="EntryName" 
-       Placeholder="Enter Name of your transaction">
+       Placeholder="Enter Name of your income">
         </Entry>
 
         <!-- Date Picker -->
@@ -20,27 +19,21 @@
             Format="D"/>
 
             <!-- Amount Entry -->
-            <Entry x:Name="AmountEntry" 
+        <Entry x:Name="AmountEntry" 
        Placeholder="Enter Amount"
        Keyboard="Numeric">
-            </Entry>
+        </Entry>
 
-            <!-- Category Picker -->
-        <Picker x:Name="CategoryPicker"
-                Title="Select Category"
-                ItemsSource="{Binding Categories, Source={StaticResource CategoryViewModel}}">
-        </Picker>
-
-            <!-- Wallet Picker -->
+        <!-- Wallet Picker -->
 
         <Picker x:Name="WalletPicker"
                 Title="Select Category"
-                ItemsSource="{Binding WalletsNames, Source={StaticResource WalletViewModel}}">
+                ItemsSource="{Binding Wallets, Source={StaticResource WalletViewModel}}">
         </Picker>
 
         <!-- Add Transaction Button -->
-            <Button Text="Add Transaction"
-        Clicked="OnAddTransactionClicked"/>
+            <Button Text="Add Income"
+        Clicked="OnAddIncomeClicked"/>
         <Button Text="Go Back" Clicked="OnGoBackClicked"/>
 
     </StackLayout>

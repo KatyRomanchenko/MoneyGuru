@@ -10,7 +10,7 @@ public class Transaction
     public int UserID { get; set; }
     public string Category { get; set; }
     public decimal Amount { get; set; }
-    public TransactionType? TransactionType { get; set; }
+    public string TransactionType { get; set; }
     public DateTime Date { get; set; }
 }
 
