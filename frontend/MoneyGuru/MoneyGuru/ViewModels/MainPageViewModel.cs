@@ -50,7 +50,7 @@ namespace MoneyGuru.ViewModels
             HttpClientFactory httpClientFactory = new HttpClientFactory();
             HttpClient client = httpClientFactory.CreateAuthenticatedClient();
 
-            var response = await client.GetAsync("http://192.168.1.6:5000/api/wallet/totalamount");
+            var response = await client.GetAsync(httpClientFactory.mainURL + "/api/wallet/totalamount");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();

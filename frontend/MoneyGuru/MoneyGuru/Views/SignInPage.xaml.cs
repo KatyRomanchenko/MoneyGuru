@@ -35,10 +35,7 @@ namespace MoneyGuru
 
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync("http://192.168.1.6:5000/api/auth/Register", content);
-
-
-            //await DisplayAlert("ALARM", ex.Message, "OK");
+            var response = await client.PostAsync(httpClientFactory.mainURL + "/api/auth/Register", content);
 
             var responseBody = await response.Content.ReadAsStringAsync();
 

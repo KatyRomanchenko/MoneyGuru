@@ -1,17 +1,4 @@
-﻿using MoneyGuru.Services;
-using MoneyGuru.ViewModels;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using RestSharp;
-using RestSharp.Authenticators;
-using RestSharp.Authenticators.OAuth2;
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using Xamarin.Forms;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 

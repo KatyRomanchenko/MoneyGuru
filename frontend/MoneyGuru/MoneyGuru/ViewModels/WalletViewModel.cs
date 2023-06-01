@@ -31,7 +31,7 @@ namespace MoneyGuru
             HttpClientFactory httpClientFactory = new HttpClientFactory();
             HttpClient client = httpClientFactory.CreateAuthenticatedClient();
 
-            var uri = new Uri("http://192.168.1.6:5000/api/wallet");
+            var uri = new Uri(httpClientFactory.mainURL + "/api/wallet");
             var response = await client.GetAsync(uri);
 
             if (response.IsSuccessStatusCode)

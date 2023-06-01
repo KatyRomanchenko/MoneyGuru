@@ -1,12 +1,6 @@
 ﻿using Xamarin.Forms;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
 using System;
-using System.Linq;
-using Xamarin.Essentials;
 using System.Net.Http;
-using MoneyGuru;
 using MoneyGuru.ViewModels;
 using Newtonsoft.Json;
 using System.Text;
@@ -35,7 +29,7 @@ namespace MoneyGuru
 
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync("http://192.168.1.6:5000/api/auth/Login", content);
+            var response = await client.PostAsync(httpClientFactory.mainURL + "/api/auth/Login", content);
 
             var responseBody = await response.Content.ReadAsStringAsync();
 

@@ -19,5 +19,7 @@ namespace MoneyGuru.Services
             HttpClient client = new HttpClient(handler);
             return client;
         }
+
+        public string mainURL = "http://192.168.1.9:5000";
     }
 }
