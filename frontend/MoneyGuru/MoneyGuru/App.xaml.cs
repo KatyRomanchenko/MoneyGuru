@@ -6,7 +6,7 @@ namespace MoneyGuru
     {
         public App()
         {
-            MainPage = new NavigationPage(new PrestartPage()) 
+            MainPage = new NavigationPage(new MainPage()) 
             {
                 BarBackgroundColor = Color.FromHex("#7853FA")
             };

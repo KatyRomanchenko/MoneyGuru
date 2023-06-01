@@ -1,10 +1,16 @@
 ﻿using MoneyGuru.Services;
+using MoneyGuru.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
+using System.ComponentModel.DataAnnotations;
+using System.Net.Http;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace MoneyGuru
 {
@@ -18,6 +24,14 @@ namespace MoneyGuru
             {
                 _walletsNames = value;
                 OnPropertyChanged("WalletsNames");
+        private List<string> _wallets;
+        public List<string> Wallets
+        {
+            get { return _wallets; }
+            set
+            {
+                _wallets = value;
+                OnPropertyChanged("Wallets");
             }
         }
 
@@ -27,11 +41,16 @@ namespace MoneyGuru
         }
 
         public async void GetWalletsNames()
+            GetWallets();
+        }
+
+        public async void GetWallets()
         {
             HttpClientFactory httpClientFactory = new HttpClientFactory();
             HttpClient client = httpClientFactory.CreateAuthenticatedClient();
 
             var uri = new Uri("http://192.168.1.6:5000/api/wallet");
+            var uri = new Uri("http://192.168.1.3:5000/api/wallet");
             var response = await client.GetAsync(uri);
 
             if (response.IsSuccessStatusCode)
@@ -39,6 +58,8 @@ namespace MoneyGuru
                 var content = await response.Content.ReadAsStringAsync();
                 var walletsNames = JsonConvert.DeserializeObject<List<string>>(content);
                 WalletsNames = walletsNames;
+                var wallets = JsonConvert.DeserializeObject<List<string>>(content);
+                Wallets = wallets;
             }
         }
 

@@ -1,4 +1,3 @@
-﻿using Microsoft.AspNetCore.Mvc;
 using MoneyGuru.WebAPI.Services;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using MoneyGuru.WebAPI;
 using MoneyGuru.WebAPI.Contracts;
-
 
 namespace MoneyGuru.WebAPI.Controllers
 {
@@ -21,7 +19,8 @@ namespace MoneyGuru.WebAPI.Controllers
             _walletService = walletService;
         }
 
-        [HttpPost] 
+        [HttpPost]
+
         public async Task<IActionResult> AddWalletAsync([FromBody] AddWalletViewModel model)
         {
             await _walletService.AddWalletAsync(model);

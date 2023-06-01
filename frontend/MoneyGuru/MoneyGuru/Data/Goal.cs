@@ -7,7 +7,7 @@ public class Goal
 {
     [PrimaryKey, AutoIncrement]
     public int GoalID { get; set; }
-    public int UserID { get; set; }
+    //public int UserID { get; set; }
 
     [Unique]
     public string Email { get; set; }
