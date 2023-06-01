@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using MoneyGuru.WebAPI.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using MoneyGuru.WebAPI.Services;
 using System;
 using System.Collections.Generic;
@@ -30,28 +28,13 @@ namespace MoneyGuru.WebAPI.Controllers
 
             return Ok();
         }
+
         [HttpGet]
-        public async Task<IActionResult> GetWallets()
-        {
-            // Предположим, что у вас есть сервис WalletService, который получает кошельки.
-            var wallets = await _walletService.GetWalletsAsync();
-
-            var wallet = wallets.Select(w => new Wallet
-            {
-                WalletName = w.WalletName,
-                AmountOfMoney = w.AmountOfMoney
-            });
-
-            return Ok(wallet);
-        }
-
-        [HttpGet("getNames")]
         public async Task<IActionResult> GetWalletsAsync()
         {
             var wallets = await _walletService.GetWalletsAsync();
 
             return Ok(wallets.Select(c => c.WalletName));
-
         }
 
         [HttpGet("{walletName}")]

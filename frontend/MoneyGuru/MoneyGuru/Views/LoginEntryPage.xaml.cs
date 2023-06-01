@@ -35,7 +35,7 @@ namespace MoneyGuru
 
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync("http://192.168.1.3:5000/api/auth/Login", content);
+            var response = await client.PostAsync("http://192.168.1.6:5000/api/auth/Login", content);
 
             var responseBody = await response.Content.ReadAsStringAsync();
 
@@ -48,7 +48,7 @@ namespace MoneyGuru
             else
             {
                 var message = "";
-                await DisplayAlert("Success", message, "OK");
+                await DisplayAlert("Error", "Something went wrong", "OK");
             }
         }
         private async void OnBackButtonClicked(object sender, EventArgs e)

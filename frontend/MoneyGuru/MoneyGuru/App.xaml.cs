@@ -1,8 +1,4 @@
-﻿using SQLite;
-using Syncfusion.SfDataGrid.XForms.DataPager;
-using System;
-using System.IO;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace MoneyGuru
 {
@@ -10,7 +6,7 @@ namespace MoneyGuru
     {
         public App()
         {
-            MainPage = new NavigationPage(new MainPage()) 
+            MainPage = new NavigationPage(new PrestartPage()) 
             {
                 BarBackgroundColor = Color.FromHex("#7853FA")
             };

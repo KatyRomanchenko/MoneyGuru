@@ -35,7 +35,7 @@ namespace MoneyGuru
             HttpClientFactory httpClientFactory = new HttpClientFactory();
             HttpClient client = httpClientFactory.CreateAuthenticatedClient();
 
-            var uri = new Uri("http://192.168.1.3:5000/api/Category");
+            var uri = new Uri("http://192.168.1.6:5000/api/Category");
             var response = await client.GetAsync(uri);
 
             if (response.IsSuccessStatusCode)

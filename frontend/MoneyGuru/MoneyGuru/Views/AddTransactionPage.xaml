@@ -34,7 +34,7 @@
             <!-- Wallet Picker -->
 
         <Picker x:Name="WalletPicker"
-                Title="Select Category"
+                Title="Select Wallet"
                 ItemsSource="{Binding WalletsNames, Source={StaticResource WalletViewModel}}">
         </Picker>
 

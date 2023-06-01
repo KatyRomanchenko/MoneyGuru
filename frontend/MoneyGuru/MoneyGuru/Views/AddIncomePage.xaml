@@ -27,8 +27,8 @@
         <!-- Wallet Picker -->
 
         <Picker x:Name="WalletPicker"
-                Title="Select Category"
-                ItemsSource="{Binding Wallets, Source={StaticResource WalletViewModel}}">
+                Title="Select Wallet"
+                ItemsSource="{Binding WalletsNames, Source={StaticResource WalletViewModel}}">
         </Picker>
 
         <!-- Add Transaction Button -->

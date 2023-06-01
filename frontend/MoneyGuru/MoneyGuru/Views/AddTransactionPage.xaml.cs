@@ -45,11 +45,11 @@ namespace MoneyGuru
 
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync("http://192.168.1.3:5000/api/transaction", content);
+            var response = await client.PostAsync("http://192.168.1.6:5000/api/transaction", content);
 
             if (response.IsSuccessStatusCode)
             {
-                var walletResponse = await client.GetAsync($"http://192.168.1.3:5000/api/wallet/{newTransaction.Wallet}");
+                var walletResponse = await client.GetAsync($"http://192.168.1.6:5000/api/wallet/{newTransaction.Wallet}");
 
                 if (walletResponse.IsSuccessStatusCode)
                 {
@@ -67,7 +67,7 @@ namespace MoneyGuru
                     var updatedWalletJson = JsonConvert.SerializeObject(updatedWallet);
                     var walletUpdateContent = new StringContent(updatedWalletJson, Encoding.UTF8, "application/json");
 
-                    var updateResponse = await client.PutAsync($"http://192.168.1.3:5000/api/wallet/{updatedWallet.WalletName}", walletUpdateContent);
+                    var updateResponse = await client.PutAsync($"http://192.168.1.6:5000/api/wallet/{updatedWallet.WalletName}", walletUpdateContent);
 
                     if (updateResponse.IsSuccessStatusCode)
                     {

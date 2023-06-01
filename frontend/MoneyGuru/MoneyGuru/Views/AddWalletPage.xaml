@@ -8,7 +8,7 @@
 
         <Entry x:Name="WalletNameEntry" Placeholder="Enter Wallet Name"/>
         <Entry x:Name="AmountOfMoney" Placeholder="Enter money amount" Keyboard="Numeric"/>
-        <Picker x:Name="WalletTypePicker" Title="Select Transaction Type">
+        <Picker x:Name="WalletTypePicker" Title="Select Wallet Type">
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
                     <x:String>Cash</x:String>
