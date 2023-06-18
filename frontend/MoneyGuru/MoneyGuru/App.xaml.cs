@@ -6,6 +6,7 @@ namespace MoneyGuru
     {
         public App()
         {
+            //DevExpress.XamarinForms.Charts.Initializer.Init();
             MainPage = new NavigationPage(new MainPage()) 
             {
                 BarBackgroundColor = Color.FromHex("#7853FA")

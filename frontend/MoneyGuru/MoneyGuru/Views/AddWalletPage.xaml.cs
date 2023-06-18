@@ -8,7 +8,7 @@ using MoneyGuru.ViewModels;
 using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
-using MoneyGuru.Views;
+using MoneyGuru;
 using MoneyGuru;
 using MoneyGuru.Services;
 

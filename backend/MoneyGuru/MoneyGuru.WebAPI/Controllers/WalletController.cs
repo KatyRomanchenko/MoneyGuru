@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using MoneyGuru.WebAPI;
 using MoneyGuru.WebAPI.Contracts;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MoneyGuru.WebAPI.Controllers
 {

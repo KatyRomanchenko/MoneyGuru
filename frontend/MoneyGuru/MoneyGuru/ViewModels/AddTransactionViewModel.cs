@@ -1,10 +1,5 @@
-﻿using MoneyGuru.ViewModels;
-using System;
-using System.ComponentModel;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
-using Xamarin.Forms;
 
 namespace MoneyGuru
 {
@@ -22,8 +17,8 @@ namespace MoneyGuru
         [Required]
         public string TransactionType { get; set; }
 
-        //[Required]
         public DateTime Date { get; set; }
-    }
 
+        public string TotalAmount = "12345";
+    }
 }

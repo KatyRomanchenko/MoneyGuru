@@ -1,21 +1,27 @@
 ﻿using MoneyGuru.Services;
-using MoneyGuru.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
-using Xamarin.Forms;
 
 namespace MoneyGuru
 {
     public class TransactionViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<Transaction> transactions;
+        public ObservableCollection<Model> Data { get; set; }
+        public string Total { get; set; }
+        public string TotalCollected { get; set; }
+        public string TotalEarned { get; set; }
+        public string TotalSaved { get; set; }
+        public string TotalWallets { get; set; }
+        public string Wallet1 { get; set; }
+        public string Wallet2 { get; set; }
+        public string Wallet3 { get; set; }
+        public string Wallet4 { get; set; }
 
         public ObservableCollection<Transaction> Transactions
         {
@@ -33,6 +39,24 @@ namespace MoneyGuru
         public TransactionViewModel()
         {
             GetTransactions();
+
+            Data = new ObservableCollection<Model>()
+            {
+            new Model("Jan", 50),
+            new Model("Feb", 70),
+            new Model("Mar", 65),
+            new Model("Apr", 57),
+            new Model("May", 48),
+            };
+            Total = "1435";
+            TotalCollected = "500";
+            TotalEarned = "1500";
+            TotalSaved = "1000";
+            TotalWallets = "435";
+            Wallet1 = "435";
+            Wallet2 = "";
+            Wallet3 = "";
+            Wallet4 = "";
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -72,7 +96,17 @@ namespace MoneyGuru
                 Transactions = new ObservableCollection<Transaction>(transactionsList);
             }
         }
+    }
+    public class Model
+    {
+        public string Month { get; set; }
 
+        public double Target { get; set; }
 
+        public Model(string xValue, double yValue)
+        {
+            Month = xValue;
+            Target = yValue;
+        }
     }
 }

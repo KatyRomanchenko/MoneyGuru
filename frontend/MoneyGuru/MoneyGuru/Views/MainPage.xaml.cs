@@ -1,6 +1,10 @@
-﻿using System;
+﻿using SkiaSharp;
+using SkiaSharp.Views.Desktop;
+using System;
+using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using static Xamarin.Forms.Internals.GIFBitmap;
 
 namespace MoneyGuru
 {
