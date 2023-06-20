@@ -67,13 +67,37 @@ namespace MoneyGuru.WebAPI.Controllers
             return Ok(existingWallet);
         }
 
-        [HttpGet("totalamount")]
-        public async Task<IActionResult> GetTotalAmountAsync()
+        [HttpGet("total")]
+        public async Task<IActionResult> GetTotalAsync()
         {
             var wallets = await _walletService.GetWalletsAsync();
-            var totalAmount = wallets.Sum(w => w.AmountOfMoney);
+            var total = wallets.Sum(w => w.AmountOfMoney);
 
-            return Ok(totalAmount);
+            return Ok(Math.Round(total));
+        }
+
+        [HttpGet("totalwallets")]
+        public async Task<IActionResult> GetTotalWalletsAsync()
+        {
+            var wallets = await _walletService.GetWalletsAsync();
+
+            var walletsAmount = wallets
+                .Where(w => w.Type == "Card" || w.Type == "Cash")
+                .Sum(w => w.AmountOfMoney);
+
+            return Ok(Math.Round(walletsAmount));
+        }
+
+        [HttpGet("totalsaved")]
+        public async Task<IActionResult> GetTotalSavedAsync()
+        {
+            var wallets = await _walletService.GetWalletsAsync();
+
+            var totalSaved = wallets
+                .Where(w => w.Type == "Saving")
+                .Sum(w => w.AmountOfMoney);
+
+            return Ok(Math.Round(totalSaved));
         }
     }
 }

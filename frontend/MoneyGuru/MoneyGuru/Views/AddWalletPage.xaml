@@ -13,6 +13,7 @@
                 <x:Array Type="{x:Type x:String}">
                     <x:String>Cash</x:String>
                     <x:String>Card</x:String>
+                    <x:String>Saving</x:String>
                 </x:Array>
             </Picker.ItemsSource>
         </Picker>

@@ -20,6 +20,6 @@ namespace MoneyGuru.Services
             return client;
         }
 
-        public string mainURL = "http://192.168.1.5:5000";
+        public string mainURL = "http://192.168.1.3:5000";
     }
 }

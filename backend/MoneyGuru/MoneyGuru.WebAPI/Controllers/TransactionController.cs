@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MoneyGuru.WebAPI.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -10,7 +11,6 @@ namespace MoneyGuru.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
     public class TransactionController : ControllerBase
     {
         private readonly ITransactionService _transactionService;
@@ -36,8 +36,43 @@ namespace MoneyGuru.WebAPI.Controllers
             {
                 return NotFound();
             }
+            transactions.Reverse();
 
             return Ok(transactions);
+        }
+
+        [HttpGet("totalEarned")]
+        public async Task<IActionResult> GetTotalEarnedAsync()
+        {
+            var transactions = await _transactionService.GetTransactionsAsync();
+
+            if (transactions == null)
+            {
+                return NotFound();
+            }
+
+            var totalEarned = transactions
+                .Where(t => t.TransactionType == "Income")
+                .Sum(t => t.Amount);
+
+            return Ok(Math.Round(totalEarned));
+        }
+
+        [HttpGet("totalSpent")]
+        public async Task<IActionResult> GetTotalSpentAsync()
+        {
+            var transactions = await _transactionService.GetTransactionsAsync();
+
+            if (transactions == null)
+            {
+                return NotFound();
+            }
+
+            var totalSpent = transactions
+                .Where(t => t.TransactionType == "Expense")
+                .Sum(t => t.Amount);
+
+            return Ok(Math.Round(totalSpent));
         }
     }
 }

@@ -9,7 +9,6 @@ using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
 using MoneyGuru;
-using MoneyGuru;
 using MoneyGuru.Services;
 
 namespace MoneyGuru
@@ -26,7 +25,6 @@ namespace MoneyGuru
             HttpClient client = httpClientFactory.CreateAuthenticatedClient();
 
             decimal amountOfMoney = Convert.ToDecimal(AmountOfMoney.Text);
-
 
             var newWallet = new AddWalletViewModel
             {
@@ -64,7 +62,6 @@ namespace MoneyGuru
                 BarBackgroundColor = Color.FromHex("#7853FA"),
                 BarTextColor = Color.Black
             };
-            Application.Current.MainPage.Title = "MAIN DASHBOARD";
         }
     }
 }
