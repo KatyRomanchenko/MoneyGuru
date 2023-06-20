@@ -18,7 +18,7 @@
             <!-- First part -->
             <Grid VerticalOptions="CenterAndExpand" BackgroundColor="Transparent">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="175"/>
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0" Margin="0">
@@ -30,19 +30,30 @@
 
                     <Frame Grid.Column="0" Padding="10" CornerRadius="15" BackgroundColor="#E9C31E">
                         <StackLayout>
-                            <Label Padding="0,0,0,0" Text="YOU SAVED" TextColor="#372774" FontSize="25" HorizontalOptions="CenterAndExpand" VerticalOptions="Start"/>
-                            <chart:SfChart>
+                            <Label Padding="0,0,0,-7" Text="YOU SAVED" TextColor="#372774" FontSize="25" HorizontalOptions="CenterAndExpand" VerticalOptions="Start"/>
+                            <chart:SfChart x:Name="chart" BackgroundColor="#E9C31E">
                                 <chart:SfChart.Series>
-                                    <chart:DoughnutSeries DoughnutCoefficient="0.6"
+                                    <chart:DoughnutSeries
                     ItemsSource="{Binding Data}"
-                    XBindingPath="Month" 
-                                                          
-                    YBindingPath="Target" />
+                    YBindingPath="Target"
+                    XBindingPath="Month"
+                    ExplodeOnTouch="True"
+                    CircularCoefficient="0.7"
+                    DoughnutCoefficient="0.6"
+                    CapStyle="EndCurve">
+                                        <chart:DoughnutSeries.CenterView>
+                                            <StackLayout HorizontalOptions = "FillAndExpand"
+                                     VerticalOptions = "FillAndExpand">
+                                                <Label Text="{Binding CenterText}" 
+                                   HorizontalOptions="CenterAndExpand" 
+                                   VerticalOptions="CenterAndExpand"/>
+                                            </StackLayout>
+                                        </chart:DoughnutSeries.CenterView>
+                                    </chart:DoughnutSeries>
                                 </chart:SfChart.Series>
                             </chart:SfChart>
                         </StackLayout>
                     </Frame>
-
                     <Frame Grid.Column="2" Padding="10" CornerRadius="15" BackgroundColor="#7853FA">
                         <StackLayout>
                             <Label Padding="0,0,0,0" Text="Wallets" TextColor="#372774" FontSize="25" HorizontalOptions="CenterAndExpand" VerticalOptions="Start"/>
@@ -225,41 +236,97 @@
         <ContentPage.BindingContext>
             <local:TransactionViewModel/>
         </ContentPage.BindingContext>
-        <StackLayout>
-            <chart:SfChart>
-                <chart:SfChart.PrimaryAxis>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="350"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-                    <chart:CategoryAxis>
+            <!-- Upper 60% Part -->
+            <StackLayout Grid.Row="0" BackgroundColor="#7853FA">
+                <Frame
+                    WidthRequest="350" 
+        HeightRequest="45"
+        CornerRadius="15"
+        Padding="0"
+        Margin="0,0,0,15"
+        BackgroundColor="#ffffff"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+                    <Picker 
+            Title="Select Category" 
+            TextColor="#7853FA"
+            TitleColor="#7853FA"
+            BackgroundColor="#ffffff"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" />
+                </Frame>
+                <Frame
+        WidthRequest="350"
+        HeightRequest="45"
+        CornerRadius="15"
+        Padding="0"
+        BackgroundColor="#ffffff"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+                    <Picker 
+            Title="Select Duration" 
+            TextColor="#7853FA"
+            TitleColor="#7853FA"
+            BackgroundColor="#ffffff"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" />
+                </Frame>
+                <!-- Line chart -->
+            </StackLayout>
 
-                    </chart:CategoryAxis>
+            <!-- #E9C31E colored Line -->
+            <StackLayout Grid.Row="1" BackgroundColor="#E9C31E" >
+                <Label Text="Total per last month" FontSize="20"  VerticalOptions="CenterAndExpand" Padding="40,0,0,0" FontAttributes="Bold"/>
+            </StackLayout>
 
-                    </chart:SfChart.PrimaryAxis>
+            <!-- Lower part with piechart -->
+            <StackLayout Grid.Row="2" Padding="50,0,50,0">
+                <chart:SfChart x:Name="chart1" BackgroundColor="Transparent">
 
-                    <chart:SfChart.SecondaryAxis>
+                    <chart:SfChart.Legend>
 
-                    <chart:NumericalAxis>
+                        <chart:ChartLegend>
+                            <chart:ChartLegend.LabelStyle>
 
-                    </chart:NumericalAxis>
+                                <chart:ChartLegendLabelStyle Font="15"/>
+                            </chart:ChartLegend.LabelStyle>
 
-                </chart:SfChart.SecondaryAxis>
-                 <chart:ColumnSeries ItemsSource="{Binding Data}" XBindingPath="Month" YBindingPath="Target"/>
-            </chart:SfChart>
-            <chart:SfChart>
-                <chart:SfChart.Series>
-                    <chart:DoughnutSeries DoughnutCoefficient="0.6"
-ItemsSource ="{Binding Data}"
-XBindingPath="Expense" 
-YBindingPath="Value" />
-                </chart:SfChart.Series>
-                <!--<chart:DoughnutSeries x:Name="doughnutSeries"
-                            ItemsSource="{Binding Data1}"
-                            XBindingPath="Category"
-                            YBindingPath="Value"
-                                          TrackColor="Aqua">
-                    </chart:DoughnutSeries>-->
-            </chart:SfChart>
-        </StackLayout>
+                        </chart:ChartLegend>
+                    </chart:SfChart.Legend>
+                    <chart:SfChart.Series>
+                        <chart:DoughnutSeries EnableAnimation="True" EnableTooltip="True"
+                ItemsSource="{Binding Data}"
+                MaximumValue="20000"
+                YBindingPath="Target"
+                XBindingPath="Month"
+                CircularCoefficient="0.6"
+                IsStackedDoughnut="true"
+                DoughnutCoefficient="0.6"
+                            Spacing="0.5"
+                CapStyle="BothFlat">
+                            <!-- Add these lines -->
+                            <chart:DoughnutSeries.DataMarker>
+                                <chart:ChartDataMarker ShowMarker="True" ShowLabel="True" LabelContent="DataMarkerLabel">
+                                    <chart:ChartDataMarker.LabelStyle>
+                                        <chart:DataMarkerLabelStyle LabelPosition="Auto"/>
+                                    </chart:ChartDataMarker.LabelStyle>
+                                </chart:ChartDataMarker>
+                            </chart:DoughnutSeries.DataMarker>
+
+                        </chart:DoughnutSeries>
+                    </chart:SfChart.Series>
+                </chart:SfChart>
+            </StackLayout>
+        </Grid>
     </ContentPage>
+
 
     <!-- Account Button -->
     <ContentPage IconImageSource="https://cdn-icons-png.flaticon.com/128/3917/3917705.png">

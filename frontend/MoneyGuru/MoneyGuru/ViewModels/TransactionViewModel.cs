@@ -1,5 +1,7 @@
 ﻿using MoneyGuru.Services;
 using Newtonsoft.Json;
+using Xamarin.Forms;
+using Syncfusion.SfChart.XForms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,8 +13,12 @@ namespace MoneyGuru
 {
     public class TransactionViewModel : INotifyPropertyChanged
     {
+        public ObservableCollection<Color> CustomPalette { get; set; }
+
         private ObservableCollection<Transaction> transactions;
         public ObservableCollection<Model> Data { get; set; }
+        public ObservableCollection<AnalysisModel> AnalysisData { get; set; }
+
         public ObservableCollection<Model1> Data1 { get; set; }
 
         private string total;
@@ -39,7 +45,7 @@ namespace MoneyGuru
                 {
                     spentThisMonth = value;
                     OnPropertyChanged();
-}
+                }
             }
         }
 
@@ -85,7 +91,29 @@ namespace MoneyGuru
             }
         }
 
-
+        private string _centerText;
+        public string CenterText
+        {
+            get => _centerText;
+            set
+            {
+                _centerText = value;
+                OnPropertyChanged(nameof(CenterText));
+            }
+        }
+        private string maxValue;
+        public string MaxValue
+        {
+            get { return maxValue; }
+            set
+            {
+                if (maxValue != value)
+                {
+                    maxValue = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public string Wallet1 { get; set; }
         public string Wallet2 { get; set; }
         public string Wallet3 { get; set; }
@@ -112,12 +140,9 @@ namespace MoneyGuru
             GetTotalWallets();
             GetTotalSaved();
             GetSpentThisMonth();
+            FetchDataAsync();
 
-            //Data = new ObservableCollection<Model>()
-            //{
-            //new Model1("May", 48),
-            //new Model1("June", 155)
-            //};
+
             Data1 = new ObservableCollection<Model1>()
             {
                 new Model1("Category1", 50),
@@ -127,19 +152,24 @@ namespace MoneyGuru
                 new Model1("Category5", 48),
             };
 
+            CenterText = "75%";
             Data = new ObservableCollection<Model>()
         {
-            new Model("Jan", 50),
-            new Model("Feb", 70),
-            new Model("Mar", 65),
-            new Model("Apr", 57),
-            new Model("May", 48),
+            new Model("Jan", 15000),
+            new Model("sEP", 200),
+            new Model("Sweets", 3700)
+//I NEED TO GET DATA FROM HTTP GET REQUEST. fROM WEBAPI. IT SHOULD CONRAIN CATEGORY NAME AND AMOUNT OF MONEY
         };
-
             Wallet1 = "435";
             Wallet2 = "";
             Wallet3 = "";
             Wallet4 = "";
+            CustomPalette = new ObservableCollection<Color>
+    {
+        Color.FromHex("#372774"),
+        Color.FromHex("#E9C31E"),
+        // ... more colors as needed
+    };
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -232,7 +262,7 @@ namespace MoneyGuru
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                if (content == "" || content == "0") 
+                if (content == "" || content == "0")
                 {
                     TotalWallets = "0";
                 }
@@ -240,6 +270,7 @@ namespace MoneyGuru
                 else
                 {
                     TotalWallets = content;
+                    MaxValue = content;
                 };
             }
         }
@@ -287,10 +318,41 @@ namespace MoneyGuru
                 };
             }
         }
+        private async void FetchDataAsync()
+        {
+            HttpClientFactory httpClientFactory = new HttpClientFactory();
+            HttpClient client = httpClientFactory.CreateAuthenticatedClient();
+
+            var uri = new Uri(httpClientFactory.mainURL + "/api/transaction/totalSpentByCategory");
+            var response = await client.GetAsync(uri);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var settings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
+                var dataList = JsonConvert.DeserializeObject<List<AnalysisModel>>(content, settings);
+
+                AnalysisData = new ObservableCollection<AnalysisModel>();
+                foreach (var data in dataList)
+                {
+                    AnalysisData.Add(new AnalysisModel(data.Category, data.TotalSpent));
+                }
+            }
+        }
+        public class AnalysisModel
+        {
+            public string Category { get; set; }
+            public double TotalSpent { get; set; }
+            public AnalysisModel(string xValue, double yValue)
+            {
+                Category = xValue;
+                TotalSpent = yValue;
+            }
+        }
+
         public class Model
         {
             public string Month { get; set; }
-
             public double Target { get; set; }
 
             public Model(string xValue, double yValue)

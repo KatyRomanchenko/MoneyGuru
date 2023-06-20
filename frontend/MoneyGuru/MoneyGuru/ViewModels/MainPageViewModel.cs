@@ -17,10 +17,8 @@ namespace MoneyGuru.ViewModels
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
-
-        private string _totalAmountString;
-
         public event PropertyChangedEventHandler PropertyChanged;
+        private string _totalAmountString;
 
         public string TotalAmountString
         {
@@ -62,5 +60,4 @@ namespace MoneyGuru.ViewModels
             }
         }
     }
-
 }

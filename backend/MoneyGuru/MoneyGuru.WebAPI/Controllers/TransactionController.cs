@@ -74,5 +74,27 @@ namespace MoneyGuru.WebAPI.Controllers
 
             return Ok(Math.Round(totalSpent));
         }
+        [HttpGet("totalSpentByCategory")]
+        public async Task<IActionResult> GetTotalSpentByCategoryAsync()
+        {
+            var transactions = await _transactionService.GetTransactionsAsync();
+
+            if (transactions == null)
+            {
+                return NotFound();
+            }
+
+            var totalSpentByCategory = transactions
+                .Where(t => t.TransactionType == "Expense")
+                .GroupBy(t => t.Category)
+                .Select(group => new
+                {
+                    Category = group.Key,
+                    TotalSpent = Math.Round(group.Sum(t => t.Amount))
+                })
+                .ToList();
+
+            return Ok(totalSpentByCategory);
+        }
     }
 }
