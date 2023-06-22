@@ -16,6 +16,7 @@
             <local:TransactionViewModel/>
         </ContentPage.BindingContext>
         <StackLayout Margin="20">
+
             <!-- First part -->
             <Grid VerticalOptions="CenterAndExpand" BackgroundColor="Transparent">
                 <Grid.RowDefinitions>
@@ -31,12 +32,7 @@
 
                     <Frame Grid.Column="0" Padding="10" CornerRadius="15" BackgroundColor="#E9C31E">
                         <StackLayout>
-                            <Label Padding="0,0,0,-7" 
-                                   Text="YOU SAVED" 
-                                   TextColor="#372774" 
-                                   FontSize="25" 
-                                   HorizontalOptions="CenterAndExpand" 
-                                   VerticalOptions="Start"/>
+                            <Label Padding="0,0,0,-5" Text="You saved 66%" TextColor="#372774" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="Start"/>
                             <chart:SfChart x:Name="chart" BackgroundColor="#E9C31E">
                                 <chart:SfChart.Series>
                                     <chart:DoughnutSeries
@@ -44,15 +40,14 @@
                                         YBindingPath="Target"
                                         XBindingPath="Month"
                                         ExplodeOnTouch="True"
-                                        CircularCoefficient="0.7"
-                                        DoughnutCoefficient="0.65"
-                                        CapStyle="EndCurve">
+                                        CircularCoefficient="0.8"
+                                        DoughnutCoefficient="0.7"
+                                        CapStyle="EndCurve"
+                                        >
                                         <chart:DoughnutSeries.CenterView>
-                                            <StackLayout HorizontalOptions = "FillAndExpand" 
-                                                         VerticalOptions = "FillAndExpand">
-                                                <Label Text="{Binding CenterText}" 
-                                                       HorizontalOptions="CenterAndExpand" 
-                                                       VerticalOptions="CenterAndExpand"/>
+                                            <StackLayout HorizontalOptions = "FillAndExpand" VerticalOptions = "FillAndExpand">
+                                                <Label Text="{Binding CenterText}" HorizontalOptions="CenterAndExpand" 
+                                   VerticalOptions="CenterAndExpand"/>
                                             </StackLayout>
                                         </chart:DoughnutSeries.CenterView>
                                     </chart:DoughnutSeries>
@@ -74,20 +69,36 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <StackLayout Grid.Column="0" Grid.Row="0" Orientation="Vertical">
-                                    <Button Margin ="0" Padding="0,0,0,0" Text="{Binding Wallet1, StringFormat='{0}$'}" TextColor="#372774" FontSize="20"/>
-                                    <Label Margin ="0" Padding="-10,-8,0,0" Text= "Small text1" FontSize="8"/>
+                                    <Frame BackgroundColor="{Binding Color1}">
+                                        <StackLayout Padding="-12,-14,-10,-20" Margin="0">
+                                            <Label Padding="0,-5,0,-3" Text="{Binding Wallet1}" TextColor="#372774" FontSize="20" HorizontalOptions="Center"/>
+                                            <Label Padding="0,-4,0,0" Text="{Binding WalletName1}" TextColor="#372774" FontSize="11" HorizontalOptions="Center"/>
+                                        </StackLayout>
+                                    </Frame>
                                 </StackLayout>
                                 <StackLayout Grid.Column="2" Grid.Row="0" Orientation="Vertical">
-                                    <Button Margin ="0" Padding="0,0,0,0" Text="{Binding Wallet2, StringFormat='{0}$'}" TextColor="#372774" FontSize="20"/>
-                                    <Label Margin ="0" Padding="-10,-8,0,0" Text= "Small text1" FontSize="8"/>
+                                    <Frame BackgroundColor="{Binding Color2}">
+                                        <StackLayout Padding="-12,-14,-10,-20" Margin="0">
+                                            <Label Padding="0,-5,0,-3" Text="{Binding Wallet2}" TextColor="#372774" FontSize="20" HorizontalOptions="Center"/>
+                                            <Label Padding="0,-4,0,0" Text="{Binding WalletName2}" TextColor="#372774" FontSize="11" HorizontalOptions="Center"/>
+                                        </StackLayout>
+                                    </Frame>
                                 </StackLayout>
                                 <StackLayout Grid.Column="2" Grid.Row="1" Orientation="Vertical">
-                                    <Button Margin ="0" Padding="0,0,0,0" Text="{Binding Wallet3, StringFormat='{0}$'}" TextColor="#372774" FontSize="20"/>
-                                    <Label Margin ="0" Padding="-10,-8,0,0" Text= "Small text1" FontSize="8"/>
+                                    <Frame BackgroundColor="{Binding Color4}">
+                                        <StackLayout Padding="-12,-14,-10,-20" Margin="0">
+                                            <Label Padding="0,-5,0,-3" Text="{Binding Wallet4}" TextColor="#372774" FontSize="20" HorizontalOptions="Center"/>
+                                            <Label Padding="0,-4,0,0" Text="{Binding WalletName4}" TextColor="#372774" FontSize="11" HorizontalOptions="Center"/>
+                                        </StackLayout>
+                                    </Frame>
                                 </StackLayout>
                                 <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Vertical">
-                                    <Button Margin ="0" Padding="0,0,0,0" Text="{Binding Wallet4, StringFormat='{0}$'}" TextColor="#372774" FontSize="20"/>
-                                    <Label Margin ="0" Padding="-10,-8,0,0" Text= "Small text1" FontSize="8"/>
+                                    <Frame BackgroundColor="{Binding Color3}">
+                                        <StackLayout Padding="-12,-14,-10,-20" Margin="0">
+                                            <Label Padding="0,-5,0,-3" Text="{Binding Wallet3}" TextColor="#372774" FontSize="20" HorizontalOptions="Center"/>
+                                            <Label Padding="0,-4,0,0" Text="{Binding WalletName3}" TextColor="#372774" FontSize="11" HorizontalOptions="Center"/>
+                                        </StackLayout>
+                                    </Frame>
                                 </StackLayout>
                             </Grid>
                         </StackLayout>

@@ -201,10 +201,16 @@ namespace MoneyGuru
                 ValueLabel = "350",
                 Color = SKColors.White
             },
-            new ChartEntry(50)
+            new ChartEntry(500)
+            {
+                Label = "21.6",
+                ValueLabel = "500",
+                Color = SKColors.White
+            },
+            new ChartEntry(550)
             {
                 Label = "22.6",
-                ValueLabel = "50",
+                ValueLabel = "550",
                 Color = SKColors.White
             },
         };

@@ -5,7 +5,6 @@
 
     <StackLayout Margin="20">
         <Label Text="Add Wallet" FontSize="25" HorizontalOptions="CenterAndExpand" VerticalOptions="Start"/>
-
         <Entry x:Name="WalletNameEntry" Placeholder="Enter Wallet Name"/>
         <Entry x:Name="AmountOfMoney" Placeholder="Enter money amount" Keyboard="Numeric"/>
         <Picker x:Name="WalletTypePicker" Title="Select Wallet Type">

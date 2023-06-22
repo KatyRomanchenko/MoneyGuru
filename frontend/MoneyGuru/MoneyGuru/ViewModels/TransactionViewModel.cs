@@ -13,12 +13,12 @@ using Newtonsoft.Json.Linq;
 using Microcharts;
 using SkiaSharp;
 using DevExpress.Data.Helpers;
+using System.Threading.Tasks;
 
 namespace MoneyGuru
 {
     public class TransactionViewModel : INotifyPropertyChanged
     {
-        public event Action NeedRefresh;
         public ObservableCollection<Color> CustomPalette { get; set; }
 
         private ObservableCollection<Transaction> transactions;
@@ -135,7 +135,170 @@ namespace MoneyGuru
                 }
             }
         }
-        public ObservableCollection<WalletData> Wallets { get; set; }
+
+
+        private string walletName1;
+        public string WalletName1
+        {
+            get { return walletName1; }
+            set
+            {
+                if (walletName1 != value)
+                {
+                    walletName1 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string walletName2;
+        public string WalletName2
+        {
+            get { return walletName2; }
+            set
+            {
+                if (walletName2 != value)
+                {
+                    walletName2 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string walletName3;
+        public string WalletName3
+        {
+            get { return walletName3; }
+            set
+            {
+                if (walletName3 != value)
+                {
+                    walletName3 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string walletName4;
+        public string WalletName4
+        {
+            get { return walletName4; }
+            set
+            {
+                if (walletName4 != value)
+                {
+                    walletName4 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string wallet1;
+        public string Wallet1
+        {
+            get { return wallet1; }
+            set
+            {
+                if (wallet1 != value)
+                {
+                    wallet1 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string wallet2;
+        public string Wallet2
+        {
+            get { return wallet2; }
+            set
+            {
+                if (wallet2 != value)
+                {
+                    wallet2 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string wallet3;
+        public string Wallet3
+        {
+            get { return wallet3; }
+            set
+            {
+                if (wallet3 != value)
+                {
+                    wallet3 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string wallet4;
+        public string Wallet4
+        {
+            get { return wallet4; }
+            set
+            {
+                if (wallet4 != value)
+                {
+                    wallet4 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string color1;
+        public string Color1
+        {
+            get { return color1; }
+            set
+            {
+                if (color1 != value)
+                {
+                    color1 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string color2;
+        public string Color2
+        {
+            get { return color2; }
+            set
+            {
+                if (color2 != value)
+                {
+                    color2 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string color3;
+        public string Color3
+        {
+            get { return color3; }
+            set
+            {
+                if (color3 != value)
+                {
+                    color3 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string color4;
+        public string Color4
+        {
+            get { return color4; }
+            set
+            {
+                if (color4 != value)
+                {
+                    color4 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        //public ObservableCollection<WalletData> Wallets { get; set; }
 
         //public string Wallet1 { get; set; }
         //public string Wallet2 { get; set; }
@@ -164,9 +327,14 @@ namespace MoneyGuru
             GetTotalSaved();
             GetSpentThisMonth();
             FetchDataAsync();
+            GetWallet1();
+            GetWallet2();
+            GetWallet3();
+            GetWallet4();
 
-            Wallets = new ObservableCollection<WalletData>();
-            LoadWallets();
+
+            //Wallets = new ObservableCollection<WalletData>();
+            //LoadWallets();
 
 
             Data1 = new ObservableCollection<Model1>()
@@ -197,10 +365,10 @@ namespace MoneyGuru
            // Wallet4 = "";
 
             CustomPalette = new ObservableCollection<Color>
-    {
-        Color.FromHex("#372774"),
-        Color.FromHex("#E9C31E"),
-    };
+            {
+                Color.FromHex("#372774"),
+                Color.FromHex("#E9C31E"),
+            };
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -226,7 +394,7 @@ namespace MoneyGuru
                     if (transaction.TransactionType == "Expense")
                     {
                         transaction.Amount = -Math.Abs(transaction.Amount);
-                        transaction.Color = "#808080"; // Assuming you want a different color for "Expense", replace "#FF0000" with your desired color.
+                        transaction.Color = "#808080";
                     }
                     else if (transaction.TransactionType == "Income")
                     {
@@ -386,12 +554,123 @@ namespace MoneyGuru
                 var content = await response.Content.ReadAsStringAsync();
                 var wallets = JsonConvert.DeserializeObject<List<WalletData>>(content);
 
-                foreach (var wallet in wallets)
+                //foreach (var wallet in wallets)
+                //{
+                    //Wallets.Add(wallet);
+                //}
+            }
+        }
+
+        public async Task GetWallet1()
+        {
+            HttpClientFactory httpClientFactory = new HttpClientFactory();
+            HttpClient client = httpClientFactory.CreateAuthenticatedClient();
+
+            var uri = new Uri(httpClientFactory.mainURL + "/api/wallet/formainpage");
+            var response = await client.GetAsync(uri);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var walletData = await response.Content.ReadAsStringAsync();
+                var wallets = JsonConvert.DeserializeObject<List<WalletData>>(walletData);
+
+                if (wallets.Count < 1)
                 {
-                    Wallets.Add(wallet);
+                    WalletName1 = "";
+                    Wallet1 = "";
+                    Color1 = "#7853FA";
+                }
+                else
+                {
+                    WalletName1 = wallets[0].WalletName;
+                    Wallet1 = wallets[0].WalletAmount.ToString();
+                    Color1 = "#eeeeee";
                 }
             }
         }
+        public async Task GetWallet2()
+        {
+            HttpClientFactory httpClientFactory = new HttpClientFactory();
+            HttpClient client = httpClientFactory.CreateAuthenticatedClient();
+
+            var uri = new Uri(httpClientFactory.mainURL + "/api/wallet/formainpage");
+            var response = await client.GetAsync(uri);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var walletData = await response.Content.ReadAsStringAsync();
+                var wallets = JsonConvert.DeserializeObject<List<WalletData>>(walletData);
+
+                if (wallets.Count < 2)
+                {
+                    WalletName2 = "";
+                    Wallet2 = "";
+                    Color2 = "#7853FA";
+                }
+                else
+                {
+                    WalletName2 = wallets[1].WalletName;
+                    Wallet2 = wallets[1].WalletAmount.ToString();
+                    Color2 = "#eeeeee";
+                }
+            }
+        }
+        public async Task GetWallet3()
+        {
+            HttpClientFactory httpClientFactory = new HttpClientFactory();
+            HttpClient client = httpClientFactory.CreateAuthenticatedClient();
+
+            var uri = new Uri(httpClientFactory.mainURL + "/api/wallet/formainpage");
+            var response = await client.GetAsync(uri);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var walletData = await response.Content.ReadAsStringAsync();
+                var wallets = JsonConvert.DeserializeObject<List<WalletData>>(walletData);
+
+                if (wallets.Count < 3)
+                {
+                    WalletName3 = "";
+                    Wallet3 = "";
+                    Color3 = "#7853FA";
+                }
+                else
+                {
+                    WalletName3 = wallets[2].WalletName;
+                    Wallet3 = wallets[2].WalletAmount.ToString();
+                    Color3 = "#eeeeee";
+                }
+            }
+        }
+        public async Task GetWallet4()
+        {
+            HttpClientFactory httpClientFactory = new HttpClientFactory();
+            HttpClient client = httpClientFactory.CreateAuthenticatedClient();
+
+            var uri = new Uri(httpClientFactory.mainURL + "/api/wallet/formainpage");
+            var response = await client.GetAsync(uri);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var walletData = await response.Content.ReadAsStringAsync();
+                var wallets = JsonConvert.DeserializeObject<List<WalletData>>(walletData);
+
+                if (wallets.Count < 4)
+                {
+                    WalletName4 = "";
+                    Wallet4 = "";
+                    Color4 = "#7853FA";
+                }
+                else
+                {
+                    WalletName4 = wallets[3].WalletName;
+                    Wallet4 = wallets[3].WalletAmount.ToString();
+                    Color4 = "#eeeeee";
+
+                }
+            }
+        }
+
         public class AnalysisModel
         {
             public string Category { get; set; }

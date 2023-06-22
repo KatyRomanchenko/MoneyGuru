@@ -115,7 +115,25 @@ namespace MoneyGuru.WebAPI.Controllers
             return Ok(walletDetails);
         }
 
-    public class WalletData
+        [HttpGet("formainpage")]
+        public async Task<IActionResult> GetWalletForMainPageAsync()
+        {
+            var wallets = await _walletService.GetWalletsAsync();
+
+            var walletDetails = wallets
+                .Where(w => w.Type != "Saving")
+                .Select(w => new WalletData
+                {
+                    WalletName = w.WalletName,
+                    WalletAmount = w.AmountOfMoney
+                });
+
+            return Ok(walletDetails);
+        }
+
+
+
+        public class WalletData
         {
             public string WalletName { get; set; }
             public decimal WalletAmount { get; set; }
