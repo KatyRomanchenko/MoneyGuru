@@ -7,7 +7,8 @@
         <ToolbarItem Text="Back" Clicked="OnBackButtonClicked" Order="Primary" Priority="0" />
     </ContentPage.ToolbarItems>
     <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-        <Image Source="https://cdn-icons-png.flaticon.com/512/1389/1389008.png" WidthRequest="200" HeightRequest="200"/>
+        <Label Text="SIGN IN" FontAttributes="Bold" TextColor="#7853FA"  HorizontalOptions="Center" FontSize="60">
+        </Label>
         <Frame BackgroundColor="#E9C31E" Margin="0,25,0,0" Padding="50,5,50,5" CornerRadius="10">
             <Entry x:Name="EmailEntry" Placeholder="Your email" PlaceholderColor="#FAFAFA" Keyboard="Email" FontSize="20" TextColor="White"/>
         </Frame>

@@ -6,8 +6,8 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Back" Clicked="OnBackButtonClicked" Order="Primary" Priority="0" />
     </ContentPage.ToolbarItems>    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-        <Image Source="icon.png"/>
-        <!--"https://img.freepik.com/free-vector/my-password-concept-illustration_114360-4294.jpg"-->
+        <Label Text="LOG IN" FontAttributes="Bold" TextColor="#7853FA"  HorizontalOptions="Center" FontSize="60">
+        </Label>
         <Frame BackgroundColor="#E9C31E" Padding="50,5,50,5" Margin="0,30,0,0" CornerRadius="10">
             <Entry x:Name="EmailEntry" Placeholder="text@example.com" PlaceholderColor="#FAFAFA" Text="{Binding Email}" Keyboard="Email" FontSize="20" TextColor="White"/>
         </Frame>
