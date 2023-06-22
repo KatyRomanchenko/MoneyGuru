@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MoneyGuru.WebAPI;
 using MoneyGuru.WebAPI.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using MoneyGuru.WebAPI.Models;
 
 namespace MoneyGuru.WebAPI.Controllers
 {
@@ -99,5 +100,26 @@ namespace MoneyGuru.WebAPI.Controllers
 
             return Ok(Math.Round(totalSaved));
         }
+
+        [HttpGet("details")]
+        public async Task<IActionResult> GetWalletDetailsAsync()
+        {
+            var wallets = await _walletService.GetWalletsAsync();
+
+            var walletDetails = wallets.Select(w => new WalletData
+            {
+                WalletName = w.WalletName,
+                WalletAmount = w.AmountOfMoney
+            });
+
+            return Ok(walletDetails);
+        }
+
+    public class WalletData
+        {
+            public string WalletName { get; set; }
+            public decimal WalletAmount { get; set; }
+        }
+
     }
 }

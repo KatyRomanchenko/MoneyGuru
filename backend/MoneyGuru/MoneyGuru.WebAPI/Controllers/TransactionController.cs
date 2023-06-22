@@ -96,5 +96,22 @@ namespace MoneyGuru.WebAPI.Controllers
 
             return Ok(totalSpentByCategory);
         }
+
+        [HttpGet("byCategory/{category}")]
+        public async Task<IActionResult> GetTransactionsByCategoryAsync(string category)
+        {
+            var transactions = await _transactionService.GetTransactionsAsync();
+
+            if (transactions == null)
+            {
+                return NotFound();
+            }
+
+            var transactionsByCategory = transactions
+                .Where(t => t.Category == category)
+                .Select(t => new { t.Category, t.Amount, t.Date });
+
+            return Ok(transactionsByCategory);
+        }
     }
 }

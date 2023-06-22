@@ -1,6 +1,9 @@
-﻿using MoneyGuru.Services;
+﻿using Microcharts;
+using MoneyGuru.Services;
 using MoneyGuru.ViewModels;
 using Newtonsoft.Json;
+using SkiaSharp;
+using SkiaSharp.Views.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,12 +27,11 @@ namespace MoneyGuru
                 OnPropertyChanged("Categories");
             }
         }
-
+        public event PropertyChangedEventHandler PropertyChanged;
         public CategoryViewModel()
         {
             GetCategories();
         }
-
         public async void GetCategories()
         {
             HttpClientFactory httpClientFactory = new HttpClientFactory();
@@ -45,9 +47,6 @@ namespace MoneyGuru
                 Categories = categories;
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

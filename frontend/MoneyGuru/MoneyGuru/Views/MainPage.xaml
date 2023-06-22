@@ -7,6 +7,7 @@
             android:TabbedPage.ToolbarPlacement="Bottom"
             xmlns:local="clr-namespace:MoneyGuru"
             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+            xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
             x:Class="MoneyGuru.MainPage">
 
     <!-- Home Button -->
@@ -30,23 +31,28 @@
 
                     <Frame Grid.Column="0" Padding="10" CornerRadius="15" BackgroundColor="#E9C31E">
                         <StackLayout>
-                            <Label Padding="0,0,0,-7" Text="YOU SAVED" TextColor="#372774" FontSize="25" HorizontalOptions="CenterAndExpand" VerticalOptions="Start"/>
+                            <Label Padding="0,0,0,-7" 
+                                   Text="YOU SAVED" 
+                                   TextColor="#372774" 
+                                   FontSize="25" 
+                                   HorizontalOptions="CenterAndExpand" 
+                                   VerticalOptions="Start"/>
                             <chart:SfChart x:Name="chart" BackgroundColor="#E9C31E">
                                 <chart:SfChart.Series>
                                     <chart:DoughnutSeries
-                    ItemsSource="{Binding Data}"
-                    YBindingPath="Target"
-                    XBindingPath="Month"
-                    ExplodeOnTouch="True"
-                    CircularCoefficient="0.7"
-                    DoughnutCoefficient="0.6"
-                    CapStyle="EndCurve">
+                                        ItemsSource="{Binding Data}"
+                                        YBindingPath="Target"
+                                        XBindingPath="Month"
+                                        ExplodeOnTouch="True"
+                                        CircularCoefficient="0.7"
+                                        DoughnutCoefficient="0.65"
+                                        CapStyle="EndCurve">
                                         <chart:DoughnutSeries.CenterView>
-                                            <StackLayout HorizontalOptions = "FillAndExpand"
-                                     VerticalOptions = "FillAndExpand">
+                                            <StackLayout HorizontalOptions = "FillAndExpand" 
+                                                         VerticalOptions = "FillAndExpand">
                                                 <Label Text="{Binding CenterText}" 
-                                   HorizontalOptions="CenterAndExpand" 
-                                   VerticalOptions="CenterAndExpand"/>
+                                                       HorizontalOptions="CenterAndExpand" 
+                                                       VerticalOptions="CenterAndExpand"/>
                                             </StackLayout>
                                         </chart:DoughnutSeries.CenterView>
                                     </chart:DoughnutSeries>
@@ -236,86 +242,104 @@
         <ContentPage.BindingContext>
             <local:TransactionViewModel/>
         </ContentPage.BindingContext>
+        <ContentPage.Resources>
+            <ResourceDictionary>
+                <local:CategoryViewModel x:Key="CategoryViewModel" />
+            </ResourceDictionary>
+        </ContentPage.Resources>
         <Grid RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="350"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-
-            <!-- Upper 60% Part -->
             <StackLayout Grid.Row="0" BackgroundColor="#7853FA">
                 <Frame
-                    WidthRequest="350" 
-        HeightRequest="45"
-        CornerRadius="15"
-        Padding="0"
-        Margin="0,0,0,15"
-        BackgroundColor="#ffffff"
-        HorizontalOptions="Center"
-        VerticalOptions="Center">
-                    <Picker 
-            Title="Select Category" 
-            TextColor="#7853FA"
-            TitleColor="#7853FA"
-            BackgroundColor="#ffffff"
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="FillAndExpand" />
+                    WidthRequest="350"
+                    HeightRequest="45"
+                    CornerRadius="15"
+                    Padding="0"
+                    Margin="0,0,0,15"
+                    BackgroundColor="#ffffff"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                    <Picker
+                        x:Name="CategoryPicker"
+                        Margin="15,0,0,0"
+                        Title="Select Category"
+                        TextColor="#7853FA"
+                        TitleColor="#7853FA"
+                        BackgroundColor="#ffffff"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        ItemsSource="{Binding Categories, Source={StaticResource CategoryViewModel}}"/>
                 </Frame>
                 <Frame
-        WidthRequest="350"
-        HeightRequest="45"
-        CornerRadius="15"
-        Padding="0"
-        BackgroundColor="#ffffff"
-        HorizontalOptions="Center"
-        VerticalOptions="Center">
+                    WidthRequest="350"
+                    HeightRequest="45"
+                    CornerRadius="15"
+                    Padding="0"
+                    BackgroundColor="#ffffff"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
                     <Picker 
-            Title="Select Duration" 
-            TextColor="#7853FA"
-            TitleColor="#7853FA"
-            BackgroundColor="#ffffff"
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="FillAndExpand" />
+                        x:Name="DurationPicker"
+                        Margin="15,0,0,0"
+                        Title="Last Month"
+                        TextColor="#7853FA"
+                        TitleColor="#7853FA"
+                        BackgroundColor="#ffffff"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"/>
                 </Frame>
-                <!-- Line chart -->
+                <Frame
+                    WidthRequest="100"
+                    HeightRequest="45"
+                    CornerRadius="15"
+                    Padding="0"
+                    Margin="0,15,0,0"
+                    BackgroundColor="#E9C31E"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                    <Button
+                        Text="View"
+                        TextColor="#ffffff"
+                        BackgroundColor="#E9C31E"
+                        Clicked="OnViewClicked"/>
+                </Frame>
+                <microcharts:ChartView x:Name="LineChartView" VerticalOptions="FillAndExpand"
+                                       HorizontalOptions="FillAndExpand"/>
             </StackLayout>
 
             <!-- #E9C31E colored Line -->
             <StackLayout Grid.Row="1" BackgroundColor="#E9C31E" >
                 <Label Text="Total per last month" FontSize="20"  VerticalOptions="CenterAndExpand" Padding="40,0,0,0" FontAttributes="Bold"/>
             </StackLayout>
-
-            <!-- Lower part with piechart -->
             <StackLayout Grid.Row="2" Padding="50,0,50,0">
                 <chart:SfChart x:Name="chart1" BackgroundColor="Transparent">
-
                     <chart:SfChart.Legend>
-
                         <chart:ChartLegend>
                             <chart:ChartLegend.LabelStyle>
-
-                                <chart:ChartLegendLabelStyle Font="15"/>
+                                <chart:ChartLegendLabelStyle FontSize="15" android:Button.UseDefaultPadding="True"/>
                             </chart:ChartLegend.LabelStyle>
-
                         </chart:ChartLegend>
                     </chart:SfChart.Legend>
                     <chart:SfChart.Series>
                         <chart:DoughnutSeries EnableAnimation="True" EnableTooltip="True"
-                ItemsSource="{Binding Data}"
-                MaximumValue="20000"
-                YBindingPath="Target"
-                XBindingPath="Month"
-                CircularCoefficient="0.6"
+                ItemsSource="{Binding AnalysisData}"
+                MaximumValue="10000"
+                YBindingPath="TotalSpent"
+                XBindingPath="Category"
+                CircularCoefficient="0.9"
                 IsStackedDoughnut="true"
-                DoughnutCoefficient="0.6"
-                            Spacing="0.5"
+                DoughnutCoefficient="0.4"
+                            Spacing="0.7"
                 CapStyle="BothFlat">
                             <!-- Add these lines -->
                             <chart:DoughnutSeries.DataMarker>
-                                <chart:ChartDataMarker ShowMarker="True" ShowLabel="True" LabelContent="DataMarkerLabel">
+                                <chart:ChartDataMarker ShowMarker="True" ShowLabel="True" LabelContent="Percentage">
                                     <chart:ChartDataMarker.LabelStyle>
-                                        <chart:DataMarkerLabelStyle LabelPosition="Auto"/>
+                                        <chart:DataMarkerLabelStyle LabelPosition="Outer"/>
                                     </chart:ChartDataMarker.LabelStyle>
                                 </chart:ChartDataMarker>
                             </chart:DoughnutSeries.DataMarker>
@@ -327,11 +351,24 @@
         </Grid>
     </ContentPage>
 
-
     <!-- Account Button -->
     <ContentPage IconImageSource="https://cdn-icons-png.flaticon.com/128/3917/3917705.png">
-        <StackLayout Margin="20">
-            <Button Text="Log Out" Clicked="OnLogOutClicked"/>
+        <StackLayout Margin="20" VerticalOptions="Center">
+            <Frame
+                    WidthRequest="350"
+                    HeightRequest="45"
+                    CornerRadius="15"
+                    Padding="0"
+                    BackgroundColor="#E9C31E"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                <Button
+                        Text="Log Out"
+                        TextColor="#ffffff"
+                        BackgroundColor="#E9C31E"
+                        Clicked="OnLogOutClicked"/>
+            </Frame>
+            <!-- Line Chart -->
         </StackLayout>
     </ContentPage>
 </TabbedPage>

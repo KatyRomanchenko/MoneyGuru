@@ -10,6 +10,9 @@ using System.Text;
 using Newtonsoft.Json;
 using MoneyGuru;
 using MoneyGuru.Services;
+using Microcharts;
+using SkiaSharp;
+using System.Collections.Generic;
 
 namespace MoneyGuru
 {

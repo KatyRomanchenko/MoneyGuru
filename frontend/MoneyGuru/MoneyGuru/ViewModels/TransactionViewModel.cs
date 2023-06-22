@@ -8,18 +8,39 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
+using System.Linq;
+using Newtonsoft.Json.Linq;
+using Microcharts;
+using SkiaSharp;
+using DevExpress.Data.Helpers;
 
 namespace MoneyGuru
 {
     public class TransactionViewModel : INotifyPropertyChanged
     {
+        public event Action NeedRefresh;
         public ObservableCollection<Color> CustomPalette { get; set; }
 
         private ObservableCollection<Transaction> transactions;
         public ObservableCollection<Model> Data { get; set; }
-        public ObservableCollection<AnalysisModel> AnalysisData { get; set; }
-
         public ObservableCollection<Model1> Data1 { get; set; }
+        public ObservableCollection<DataModel> Data3 { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private ObservableCollection<AnalysisModel> _analysisData;
+        public ObservableCollection<AnalysisModel> AnalysisData
+        {
+            get => _analysisData;
+            set
+            {
+                if (_analysisData != value)
+                {
+                    _analysisData = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         private string total;
         public string Total
@@ -114,10 +135,12 @@ namespace MoneyGuru
                 }
             }
         }
-        public string Wallet1 { get; set; }
-        public string Wallet2 { get; set; }
-        public string Wallet3 { get; set; }
-        public string Wallet4 { get; set; }
+        public ObservableCollection<WalletData> Wallets { get; set; }
+
+        //public string Wallet1 { get; set; }
+        //public string Wallet2 { get; set; }
+        //public string Wallet3 { get; set; }
+        //public string Wallet4 { get; set; }
 
         public ObservableCollection<Transaction> Transactions
         {
@@ -142,37 +165,44 @@ namespace MoneyGuru
             GetSpentThisMonth();
             FetchDataAsync();
 
+            Wallets = new ObservableCollection<WalletData>();
+            LoadWallets();
+
 
             Data1 = new ObservableCollection<Model1>()
             {
-                new Model1("Category1", 50),
-                new Model1("Category2", 70),
-                new Model1("Category3", 65),
-                new Model1("Category4", 57),
-                new Model1("Category5", 48),
+                new Model1(2001, 50),
+                new Model1(2002, 70),
+                new Model1(2003, 65),
+                new Model1(2003, 57),
+                new Model1(2010, 48),
             };
 
             CenterText = "75%";
             Data = new ObservableCollection<Model>()
         {
-            new Model("Jan", 15000),
             new Model("sEP", 200),
-            new Model("Sweets", 3700)
-//I NEED TO GET DATA FROM HTTP GET REQUEST. fROM WEBAPI. IT SHOULD CONRAIN CATEGORY NAME AND AMOUNT OF MONEY
+            new Model("Sweets", 100)
         };
-            Wallet1 = "435";
-            Wallet2 = "";
-            Wallet3 = "";
-            Wallet4 = "";
+            Data3 = new ObservableCollection<DataModel>() 
+            {
+                new DataModel("13/11/2023", 200),
+                new DataModel("13/11/2023", 200),
+                new DataModel("14/11/2023", 800)
+            };
+
+            //Wallet1 = "435";
+           // Wallet2 = "";
+            //Wallet3 = "";
+           // Wallet4 = "";
+
             CustomPalette = new ObservableCollection<Color>
     {
         Color.FromHex("#372774"),
         Color.FromHex("#E9C31E"),
-        // ... more colors as needed
     };
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -332,10 +362,33 @@ namespace MoneyGuru
                 var settings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
                 var dataList = JsonConvert.DeserializeObject<List<AnalysisModel>>(content, settings);
 
-                AnalysisData = new ObservableCollection<AnalysisModel>();
-                foreach (var data in dataList)
+                var sortedDataList = dataList.OrderBy(x => x.TotalSpent).ToList();
+
+                var newAnalysisData = new ObservableCollection<AnalysisModel>();
+                foreach (var data in sortedDataList)
                 {
-                    AnalysisData.Add(new AnalysisModel(data.Category, data.TotalSpent));
+                    newAnalysisData.Add(new AnalysisModel(data.Category, data.TotalSpent));
+                }
+
+                AnalysisData = newAnalysisData;
+            }
+        }
+        private async void LoadWallets()
+        {
+            HttpClientFactory httpClientFactory = new HttpClientFactory();
+            HttpClient client = httpClientFactory.CreateAuthenticatedClient();
+
+            var uri = new Uri(httpClientFactory.mainURL + "/api/wallet/details");
+            var response = await client.GetAsync(uri);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var wallets = JsonConvert.DeserializeObject<List<WalletData>>(content);
+
+                foreach (var wallet in wallets)
+                {
+                    Wallets.Add(wallet);
                 }
             }
         }
@@ -364,14 +417,30 @@ namespace MoneyGuru
 
         public class Model1
         {
-            public string Category { get; set; }
+            public int Year { get; set; }
             public double Value { get; set; }
 
-            public Model1(string category, double value)
+            public Model1(int xValue, double yValue)
             {
-                Category = category;
-                Value = value;
+                Year = xValue;
+                Value = yValue;
             }
+        }
+
+        public class DataModel
+        {
+            public string Day { get; set; }
+            public double Value { get; set; }
+            public DataModel(string xValue, double yValue)
+            {
+                Day = xValue;
+                Value = yValue;
+            }
+        }
+        public class WalletData
+        {
+            public string WalletName { get; set; }
+            public double WalletAmount { get; set; }
         }
     }
 }

@@ -25,6 +25,7 @@ namespace MoneyGuru.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Microcharts.Droid.Resource.String.library_name = global::MoneyGuru.Droid.Resource.String.library_name;
 			global::SkiaSharp.Views.Android.Resource.Attribute.ignorePixelScaling = global::MoneyGuru.Droid.Resource.Attribute.ignorePixelScaling;
 			global::SkiaSharp.Views.Android.Resource.Styleable.SKCanvasView = global::MoneyGuru.Droid.Resource.Styleable.SKCanvasView;
 			global::SkiaSharp.Views.Android.Resource.Styleable.SKCanvasView_ignorePixelScaling = global::MoneyGuru.Droid.Resource.Styleable.SKCanvasView_ignorePixelScaling;
