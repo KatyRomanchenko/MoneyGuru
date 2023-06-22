@@ -32,9 +32,30 @@
         </Picker>
 
         <!-- Add Transaction Button -->
-            <Button Text="Add Income"
-        Clicked="OnAddIncomeClicked"/>
-        <Button Text="Go Back" Clicked="OnGoBackClicked"/>
+        <Frame
+            WidthRequest="350"
+            HeightRequest="45"
+            CornerRadius="15"
+            Padding="0"
+            BackgroundColor="#E9C31E">
+            <Button
+                        Text="Add Income"
+                        TextColor="#ffffff"
+                        BackgroundColor="#E9C31E"
+                        Clicked="OnAddIncomeClicked"/>
+        </Frame>
+        <Frame
+            WidthRequest="350"
+            HeightRequest="45"
+            CornerRadius="15"
+            Padding="0"
+            BackgroundColor="#E9C31E">
+            <Button
+                        Text="Go Back"
+                        TextColor="#ffffff"
+                        BackgroundColor="#E9C31E"
+                        Clicked="OnGoBackClicked"/>
+        </Frame>
 
     </StackLayout>
 </ContentPage>

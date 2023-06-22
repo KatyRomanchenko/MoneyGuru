@@ -72,6 +72,11 @@ namespace MoneyGuru
                     if (updateResponse.IsSuccessStatusCode)
                     {
                         await DisplayAlert("Success", "Income added successfully", "OK");
+                        Application.Current.MainPage = new NavigationPage(new MainPage())
+                        {
+                            BarBackgroundColor = Color.FromHex("#7853FA"),
+                            BarTextColor = Color.Black
+                        };
                     }
                     else
                     {

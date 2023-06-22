@@ -16,7 +16,11 @@ namespace MoneyGuru
         }
         async void OnBackButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PopAsync();
+            Application.Current.MainPage = new NavigationPage(new MainPage())
+            {
+                BarBackgroundColor = Color.FromHex("#7853FA"),
+                BarTextColor = Color.Black
+            };
         }
 
         void OnSelectNumber(object sender, EventArgs e)

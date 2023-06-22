@@ -21,7 +21,6 @@ namespace MoneyGuru
     public partial class MainPage
     {
         public TransactionViewModel TransactionViewModel { get; set; }
-        //public List<ChartEntry> entries = new List<ChartEntry>();
         private ObservableCollection<AnalysisModel> _lineData;
         public ObservableCollection<AnalysisModel> LineData
         {
@@ -61,19 +60,35 @@ namespace MoneyGuru
 
         private async void OnAddTransactionClicked(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new NavigationPage(new AddTransactionPage());
+            Application.Current.MainPage = new NavigationPage(new AddTransactionPage())
+            { 
+                BarBackgroundColor = Color.FromHex("#7853FA"), 
+                BarTextColor = Color.Black 
+            };
         }
         private async void OnAddCategoryClicked(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new NavigationPage(new AddCategoryPage());
+            Application.Current.MainPage = new NavigationPage(new AddCategoryPage())
+            {
+                BarBackgroundColor = Color.FromHex("#7853FA"),
+                BarTextColor = Color.Black
+            };
         }
         private async void OnAddWalletClicked(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new NavigationPage(new AddWalletPage());
+            Application.Current.MainPage = new NavigationPage(new AddWalletPage())
+            {
+                BarBackgroundColor = Color.FromHex("#7853FA"),
+                BarTextColor = Color.Black
+            };
         }
         private async void OnAddIncomeClicked(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new NavigationPage(new AddIncomePage());
+            Application.Current.MainPage = new NavigationPage(new AddIncomePage())
+            {
+                BarBackgroundColor = Color.FromHex("#7853FA"),
+                BarTextColor = Color.Black
+            };
         }
         private async void OnCreateGoalClicked(object sender, EventArgs e)
         {
@@ -162,22 +177,34 @@ namespace MoneyGuru
         }
         private readonly ChartEntry[] entries = new[]
         {
+            new ChartEntry(250)
+            {
+                Label = "6.6",
+                ValueLabel = "250",
+                Color = SKColors.White
+            },
             new ChartEntry(150)
             {
-                Label = "12.3",
+                Label = "11.6",
                 ValueLabel = "150",
                 Color = SKColors.White
             },
-            new ChartEntry(500)
+            new ChartEntry(200)
             {
-                Label = "16.3",
-                ValueLabel = "150",
+                Label = "15.6",
+                ValueLabel = "200",
                 Color = SKColors.White
             },
-            new ChartEntry(1500)
+            new ChartEntry(350)
             {
-                Label = "22.3",
-                ValueLabel = "150",
+                Label = "20.6",
+                ValueLabel = "350",
+                Color = SKColors.White
+            },
+            new ChartEntry(50)
+            {
+                Label = "22.6",
+                ValueLabel = "50",
                 Color = SKColors.White
             },
         };

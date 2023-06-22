@@ -266,7 +266,7 @@
                     <Picker
                         x:Name="CategoryPicker"
                         Margin="15,0,0,0"
-                        Title="Select Category"
+                        Title="Gas"
                         TextColor="#7853FA"
                         TitleColor="#7853FA"
                         BackgroundColor="#ffffff"
@@ -310,7 +310,6 @@
                 <microcharts:ChartView x:Name="LineChartView" VerticalOptions="FillAndExpand"
                                        HorizontalOptions="FillAndExpand"/>
             </StackLayout>
-
             <!-- #E9C31E colored Line -->
             <StackLayout Grid.Row="1" BackgroundColor="#E9C31E" >
                 <Label Text="Total per last month" FontSize="20"  VerticalOptions="CenterAndExpand" Padding="40,0,0,0" FontAttributes="Bold"/>
@@ -327,7 +326,7 @@
                     <chart:SfChart.Series>
                         <chart:DoughnutSeries EnableAnimation="True" EnableTooltip="True"
                 ItemsSource="{Binding AnalysisData}"
-                MaximumValue="10000"
+                MaximumValue="7000"
                 YBindingPath="TotalSpent"
                 XBindingPath="Category"
                 CircularCoefficient="0.9"
